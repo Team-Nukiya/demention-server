@@ -1,4 +1,4 @@
-package team.nukiya.demention.global.redis
+package team.nukiya.demention.global.config.redis
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisKeyValueAdapter
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 
-@EnableRedisRepositories(enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
+@EnableRedisRepositories//(enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
 @Configuration
 class RedisConfig(
     private val redisProperties: RedisProperties

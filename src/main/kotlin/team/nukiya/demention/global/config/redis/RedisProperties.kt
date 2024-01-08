@@ -1,4 +1,4 @@
-package team.nukiya.demention.global.redis
+package team.nukiya.demention.global.config.redis
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

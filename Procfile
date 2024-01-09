@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$SERVER_PORT build/libs/demention-0.0.1-SNAPSHOT.jar
+web: java -jar -Dserver.port=$PORT build/libs/demention-0.0.1-SNAPSHOT.jar

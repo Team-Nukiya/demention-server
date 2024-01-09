@@ -30,7 +30,7 @@ class SecurityConfig(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 // health check
-                it.requestMatchers(HttpMethod.GET, "/").permitAll()
+                it.requestMatchers(HttpMethod.GET, "/health-check").permitAll()
                     .anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)

@@ -35,6 +35,8 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testRuntimeOnly("com.h2database:h2")
+    implementation("net.nurigo:javaSDK:2.2")
 }
 
 allOpen {

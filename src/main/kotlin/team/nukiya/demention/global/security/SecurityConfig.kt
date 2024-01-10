@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 import team.nukiya.demention.global.filter.GlobalExceptionFilter
 import team.nukiya.demention.global.filter.JwtFilter
 import team.nukiya.demention.global.security.jwt.JwtParser
@@ -18,11 +19,11 @@ import team.nukiya.demention.global.security.jwt.JwtParser
 @Configuration
 class SecurityConfig(
     private val jwtParser: JwtParser,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) {
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    fun filterChain(http: HttpSecurity, authCodeEntityRepository: AuthCodeEntityRepository): SecurityFilterChain {
         return http
             .csrf { it.disable() }
             .formLogin { it.disable() }
@@ -31,7 +32,9 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 // health check
                 it.requestMatchers(HttpMethod.GET, "/health-check").permitAll()
-                    .anyRequest().denyAll()
+                // auth
+                it.requestMatchers(HttpMethod.GET, "/auth/certified").permitAll()
+                it.anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(GlobalExceptionFilter(objectMapper), JwtFilter::class.java)

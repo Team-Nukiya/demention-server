@@ -4,4 +4,4 @@ import org.springframework.data.repository.CrudRepository
 import team.nukiya.demention.domain.user.domain.UserEntity
 import java.util.UUID
 
-interface UserRepository : CrudRepository<UserEntity, UUID>
+interface UserEntityRepository : CrudRepository<UserEntity, UUID>

@@ -1,20 +1,31 @@
 package team.nukiya.demention.domain.auth.controller
 
+import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import team.nukiya.demention.domain.auth.controller.dto.SendAuthCodeRequest
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.domain.auth.service.CertifyAuthCodeService
+import team.nukiya.demention.domain.auth.service.SendAuthCodeService
 
 @Validated
 @RequestMapping("/v1/auth")
 @RestController
 class AuthController(
+    private val sendAuthCodeService: SendAuthCodeService,
     private val certifyAuthCodeService: CertifyAuthCodeService,
 ) {
+
+    @PostMapping("/codes")
+    fun sendCode(@RequestBody @Valid request: SendAuthCodeRequest) {
+        sendAuthCodeService.send(request.to)
+    }
 
     @GetMapping("/certified")
     fun certifyAuthCode(

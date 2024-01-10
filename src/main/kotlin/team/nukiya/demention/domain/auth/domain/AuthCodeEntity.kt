@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
 import org.springframework.data.redis.core.index.Indexed
 
-@RedisHash(timeToLive = 300)
+@RedisHash(timeToLive = 180)
 class AuthCodeEntity(
     @Id
     val code: String,

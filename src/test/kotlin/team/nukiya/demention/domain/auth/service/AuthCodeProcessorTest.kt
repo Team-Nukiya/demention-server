@@ -1,8 +1,8 @@
 package team.nukiya.demention.domain.auth.service
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import team.nukiya.demention.domain.auth.domain.AuthCode
@@ -10,8 +10,8 @@ import team.nukiya.demention.domain.auth.domain.AuthCodeEntity
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 
 @SpringBootTest
-class CertifyAuthCodeServiceTest @Autowired constructor(
-    private val certifyAuthCodeService: CertifyAuthCodeService,
+class AuthCodeProcessorTest @Autowired constructor(
+    private val authCodeProcessor: AuthCodeProcessor,
     private val authCodeEntityRepository: AuthCodeEntityRepository,
 ) {
 
@@ -21,10 +21,11 @@ class CertifyAuthCodeServiceTest @Autowired constructor(
     }
 
     @Test
-    fun `유저가 보낸 인증 코드와 전화번호가 올바른지 확인한다`() {
+    fun `인증 코드 엔티티를 저장하고 인증 코드 도메인으로 변환한다`() {
         // given
         val code = "111111"
         val phoneNumber = "010xxxxxxxx"
+
         val authCodeEntity = AuthCodeEntity(
             code = code,
             phoneNumber = phoneNumber,
@@ -36,9 +37,10 @@ class CertifyAuthCodeServiceTest @Autowired constructor(
             phoneNumber = phoneNumber,
         )
 
-        // when & then
-        assertDoesNotThrow {
-            certifyAuthCodeService.certify(authCode)
-        }
+        // when
+        val savedAuthCode = authCodeProcessor.saveAuthCode(authCode)
+
+        // then
+        assertThat(savedAuthCode).usingRecursiveComparison().isEqualTo(authCode)
     }
 }

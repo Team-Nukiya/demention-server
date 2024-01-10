@@ -33,6 +33,7 @@ class SecurityConfig(
                 // health check
                 it.requestMatchers(HttpMethod.GET, "/health-check").permitAll()
                 // auth
+                it.requestMatchers(HttpMethod.POST, "/auth/codes").permitAll()
                 it.requestMatchers(HttpMethod.GET, "/auth/certified").permitAll()
                 it.anyRequest().denyAll()
             }

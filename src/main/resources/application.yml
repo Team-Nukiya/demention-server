@@ -26,3 +26,8 @@ jwt:
   secret-key: ${SECRET_KEY}
   access-exp: ${ACCESS_EXP}
   refresh_exp: ${REFRESH_EXP}
+
+cool-sms:
+  api-key: ${COOL_SMS_API_KEY}
+  secret-key: ${COOL_SMS_SECRET_KEY}
+  from: ${COOL_SMS_FROM}

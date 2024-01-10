@@ -38,3 +38,6 @@ out/
 
 ### DS_STORE ###
 .DS_STORE
+
+### application.yml ###
+/src/test/resources/application.yml

@@ -1,12 +1,12 @@
 package team.nukiya.demention.domain.auth.service
 
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.domain.auth.domain.AuthCodeMapper
 import team.nukiya.demention.domain.auth.exception.AuthCodeNotFoundException
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 
-@Service
+@Component
 class AuthCodeReader(
     private val authCodeEntityRepository: AuthCodeEntityRepository,
     private val authCodeMapper: AuthCodeMapper,

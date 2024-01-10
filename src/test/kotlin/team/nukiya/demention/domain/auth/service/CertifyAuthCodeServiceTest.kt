@@ -11,7 +11,6 @@ import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 
 @SpringBootTest
 class CertifyAuthCodeServiceTest @Autowired constructor(
-    @Autowired
     private val certifyAuthCodeService: CertifyAuthCodeService,
     private val authCodeEntityRepository: AuthCodeEntityRepository,
 ) {

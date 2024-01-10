@@ -33,8 +33,8 @@ class SecurityConfig(
                 // health check
                 it.requestMatchers(HttpMethod.GET, "/health-check").permitAll()
                 // auth
-                it.requestMatchers(HttpMethod.POST, "/auth/codes").permitAll()
-                it.requestMatchers(HttpMethod.GET, "/auth/certified").permitAll()
+                it.requestMatchers(HttpMethod.POST, "$VERSION$AUTH_URL/codes").permitAll()
+                it.requestMatchers(HttpMethod.GET, "$VERSION$AUTH_URL/certified").permitAll()
                 it.anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
@@ -44,4 +44,9 @@ class SecurityConfig(
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
+
+    companion object {
+        private const val AUTH_URL = "/auth"
+        private const val VERSION = "/v1"
+    }
 }

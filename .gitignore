@@ -41,3 +41,5 @@ out/
 
 ### application.yml ###
 /src/test/resources/application.yml
+
+/src/main/kotlin/team/nukiya/demention/infrastructure/client/KakaoAddressProperties.kt

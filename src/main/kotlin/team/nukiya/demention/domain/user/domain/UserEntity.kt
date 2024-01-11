@@ -27,8 +27,16 @@ class UserEntity(
     val name: String?,
 
     @NotNull
-    @Column(columnDefinition = "VARCHAR(20)")
-    val area: String,
+    @Column(columnDefinition = "VARCHAR(40)")
+    val cityProvinceName: String,
+
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(40)")
+    val countyDistricts: String,
+
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(40)")
+    val eupMyeonDong: String,
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(20)")

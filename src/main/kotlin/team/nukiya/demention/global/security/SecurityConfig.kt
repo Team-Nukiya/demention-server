@@ -46,7 +46,7 @@ class SecurityConfig(
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     companion object {
-        private const val AUTH_URL = "/auth"
         private const val VERSION = "/v1"
+        private const val AUTH_URL = "/auth"
     }
 }

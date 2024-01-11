@@ -1,13 +1,14 @@
 package team.nukiya.demention.domain.user.domain
 
+import team.nukiya.demention.domain.user.domain.Authority.USER
 import java.util.UUID
 
 data class User(
-    val id: UUID,
+    val id: UUID = UUID.randomUUID(),
     val phoneNumber: String,
     val nickName: String,
-    val name: String?,
-    val area: String,
-    val authority: Authority,
-    val isDeleted: Boolean,
+    val name: String? = null,
+    val address: Address,
+    val authority: Authority = USER,
+    val isDeleted: Boolean = false,
 )

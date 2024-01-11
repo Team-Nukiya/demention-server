@@ -5,9 +5,9 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
-import team.nukiya.demention.global.security.jwt.JwtConstant.HEADER
-import team.nukiya.demention.global.security.jwt.JwtConstant.PREFIX
-import team.nukiya.demention.global.security.jwt.JwtParser
+import team.nukiya.demention.infrastructure.jwt.JwtConstant.HEADER
+import team.nukiya.demention.infrastructure.jwt.JwtConstant.PREFIX
+import team.nukiya.demention.infrastructure.jwt.JwtParser
 
 class JwtFilter(
     private val jwtParser: JwtParser

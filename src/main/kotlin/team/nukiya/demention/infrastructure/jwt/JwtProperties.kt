@@ -1,4 +1,4 @@
-package team.nukiya.demention.global.security.jwt
+package team.nukiya.demention.infrastructure.jwt
 
 import io.jsonwebtoken.security.Keys
 import org.springframework.boot.context.properties.ConfigurationProperties

@@ -11,10 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 import team.nukiya.demention.global.filter.GlobalExceptionFilter
 import team.nukiya.demention.global.filter.JwtFilter
-import team.nukiya.demention.global.security.jwt.JwtParser
+import team.nukiya.demention.infrastructure.jwt.JwtParser
 
 @Configuration
 class SecurityConfig(
@@ -23,7 +22,7 @@ class SecurityConfig(
 ) {
 
     @Bean
-    fun filterChain(http: HttpSecurity, authCodeEntityRepository: AuthCodeEntityRepository): SecurityFilterChain {
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
             .csrf { it.disable() }
             .formLogin { it.disable() }
@@ -35,6 +34,9 @@ class SecurityConfig(
                 // auth
                 it.requestMatchers(HttpMethod.POST, "$VERSION$AUTH_URL/codes").permitAll()
                 it.requestMatchers(HttpMethod.GET, "$VERSION$AUTH_URL/certified").permitAll()
+                // user
+                it.requestMatchers(HttpMethod.POST, "$VERSION$USER_URL/sign-up").permitAll()
+                it.requestMatchers(HttpMethod.POST, "$VERSION$USER_URL/sign-in").permitAll()
                 it.anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
@@ -48,5 +50,6 @@ class SecurityConfig(
     companion object {
         private const val VERSION = "/v1"
         private const val AUTH_URL = "/auth"
+        private const val USER_URL = "/users"
     }
 }

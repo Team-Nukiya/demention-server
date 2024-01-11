@@ -11,7 +11,12 @@ class UserMapper : GenericMapper<User, UserEntity> {
             phoneNumber = entity.phoneNumber,
             nickName = entity.nickName,
             name = entity.name,
-            area = entity.area,
+            address = Address(
+                addressName = entity.addressName,
+                sido = entity.sido,
+                gungu = entity.gungu,
+                eupMyeonDong = entity.eupMyeonDong,
+            ),
             authority = entity.authority,
             isDeleted = entity.isDeleted,
         )
@@ -23,7 +28,10 @@ class UserMapper : GenericMapper<User, UserEntity> {
             phoneNumber = domain.phoneNumber,
             nickName = domain.nickName,
             name = domain.name,
-            area = domain.area,
+            addressName = domain.address.addressName,
+            sido = domain.address.sido,
+            gungu = domain.address.gungu,
+            eupMyeonDong = domain.address.eupMyeonDong,
             authority = domain.authority,
             isDeleted = domain.isDeleted,
         )

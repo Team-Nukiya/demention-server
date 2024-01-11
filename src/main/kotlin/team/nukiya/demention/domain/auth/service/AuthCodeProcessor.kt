@@ -2,7 +2,6 @@ package team.nukiya.demention.domain.auth.service
 
 import org.springframework.stereotype.Component
 import team.nukiya.demention.domain.auth.domain.AuthCode
-import team.nukiya.demention.domain.auth.domain.AuthCodeEntity
 import team.nukiya.demention.domain.auth.domain.AuthCodeMapper
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 
@@ -14,9 +13,6 @@ class AuthCodeProcessor(
 
     fun saveAuthCode(authCode: AuthCode) =
         authCodeEntityRepository.save(
-            AuthCodeEntity(
-                code = authCode.code,
-                phoneNumber = authCode.phoneNumber,
-            )
+            authCodeMapper.toEntity(authCode)
         ).apply { authCodeMapper.toDomain(this) }
 }

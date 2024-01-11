@@ -15,7 +15,7 @@ class CoolSmsUtil(
         val params = HashMap<String, String>().apply {
             this[TO] = to
             this[FROM] = coolSmsProperties.from
-            this[TYPE] = "sms"
+            this[TYPE] = SMS
             this[TEXT] = "${code}가 Demention 인증 코드입니다."
         }
 
@@ -26,6 +26,7 @@ class CoolSmsUtil(
         private const val TO = "to"
         private const val FROM = "from"
         private const val TYPE = "type"
+        private const val SMS = "sms"
         private const val TEXT = "text"
     }
 }

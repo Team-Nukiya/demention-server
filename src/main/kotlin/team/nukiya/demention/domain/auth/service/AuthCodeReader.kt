@@ -1,5 +1,6 @@
 package team.nukiya.demention.domain.auth.service
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.domain.auth.domain.AuthCodeMapper
@@ -12,10 +13,9 @@ class AuthCodeReader(
     private val authCodeMapper: AuthCodeMapper,
 ) {
 
-    fun getAuthCodeByCodeAndPhoneNumber(authCode: AuthCode): AuthCode {
-        val authCodeEntity = authCodeEntityRepository.findByCodeAndPhoneNumber(authCode.code, authCode.phoneNumber)
-            ?: throw AuthCodeNotFoundException
-
-        return authCodeMapper.toDomain(authCodeEntity)
+    fun getAuthCodeByCode(code: String): AuthCode {
+        return authCodeEntityRepository.findByIdOrNull(code)?.let {
+            authCodeMapper.toDomain(it)
+        } ?: throw AuthCodeNotFoundException
     }
 }

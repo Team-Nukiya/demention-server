@@ -9,7 +9,7 @@ class CertifyAuthCodeService(
 ) {
 
     fun certify(authCode: AuthCode) {
-        authCodeReader.getAuthCodeByCodeAndPhoneNumber(authCode)
+        authCodeReader.getAuthCodeByCode(authCode.code)
             .apply { authCode.certifyAuthCode(this) }
     }
 }

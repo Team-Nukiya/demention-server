@@ -37,6 +37,7 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testRuntimeOnly("com.h2database:h2")
     implementation("net.nurigo:javaSDK:2.2")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 }
 
 allOpen {
@@ -81,5 +82,13 @@ tasks {
 
     build {
         dependsOn(asciidoctor)
+    }
+}
+
+extra["springCloudVersion"] = "2023.0.0"
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
 }

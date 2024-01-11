@@ -1,4 +1,4 @@
-package team.nukiya.demention.global.security.jwt
+package team.nukiya.demention.infrastructure.jwt
 
 object JwtConstant {
     const val HEADER = "Authorization"

@@ -14,5 +14,5 @@ class AuthCodeProcessor(
     fun saveAuthCode(authCode: AuthCode) =
         authCodeEntityRepository.save(
             authCodeMapper.toEntity(authCode)
-        ).apply { authCodeMapper.toDomain(this) }
+        ).let { authCodeMapper.toDomain(it) }
 }

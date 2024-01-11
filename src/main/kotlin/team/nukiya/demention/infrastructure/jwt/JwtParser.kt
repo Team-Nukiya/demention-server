@@ -1,4 +1,4 @@
-package team.nukiya.demention.global.security.jwt
+package team.nukiya.demention.infrastructure.jwt
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
@@ -11,9 +11,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
 import team.nukiya.demention.global.exception.InternalServerErrorException
 import team.nukiya.demention.global.security.auth.AuthDetailsService
-import team.nukiya.demention.global.security.exception.ExpiredTokenException
-import team.nukiya.demention.global.security.exception.InvalidTokenException
-import team.nukiya.demention.global.security.jwt.JwtConstant.ACCESS
+import team.nukiya.demention.infrastructure.jwt.JwtConstant.ACCESS
 
 @Component
 class JwtParser(

@@ -7,14 +7,15 @@ import team.nukiya.demention.domain.user.domain.Coordinate
 import team.nukiya.demention.domain.user.domain.UserMapper
 import team.nukiya.demention.domain.user.exception.UserNotFoundException
 import team.nukiya.demention.domain.user.repository.UserEntityRepository
-import team.nukiya.demention.infrastructure.client.KakaoAddressFeignClient
+import team.nukiya.demention.infrastructure.client.address.GetAddressService
+import team.nukiya.demention.infrastructure.client.address.KakaoAddressFeignClient
 
 @Transactional(readOnly = true)
 @Component
 class UserReader(
     private val userEntityRepository: UserEntityRepository,
     private val userMapper: UserMapper,
-    private val kakaoAddressFeignClient: KakaoAddressFeignClient,
+    private val getAddressService: GetAddressService,
 ) {
 
     fun getByPhoneNumber(phoneNumber: String) =
@@ -26,18 +27,6 @@ class UserReader(
     fun existsByPhoneNumber(phoneNumber: String) =
         userEntityRepository.existsByPhoneNumber(phoneNumber)
 
-    fun getAddressByCoordinate(coordinate: Coordinate): Address {
-        val addressResponse = kakaoAddressFeignClient.getAddressByCoordinate(
-            x = coordinate.longitude,
-            y = coordinate.latitude,
-        )
-
-        val addressElement = addressResponse.documents[0].address
-        return Address(
-            addressName = addressElement.addressName,
-            sido = addressElement.sido,
-            gungu = addressElement.gungu,
-            eupMyeonDong = addressElement.eupMyeonDong,
-        )
-    }
+    fun getAddressByCoordinate(coordinate: Coordinate) =
+        getAddressService.getAddressByCoordinate(coordinate)
 }

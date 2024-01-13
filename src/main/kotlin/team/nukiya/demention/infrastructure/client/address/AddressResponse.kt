@@ -1,4 +1,4 @@
-package team.nukiya.demention.infrastructure.client
+package team.nukiya.demention.infrastructure.client.address
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

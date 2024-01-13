@@ -18,7 +18,6 @@ class UserSignUpService(
         phoneNumber: String,
         coordinate: Coordinate,
     ): TokenResponse {
-
         if (userReader.existsByPhoneNumber(phoneNumber)) {
             throw UserAlreadyExistsException
         }

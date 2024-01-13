@@ -31,3 +31,6 @@ cool-sms:
   api-key: ${COOL_SMS_API_KEY}
   secret-key: ${COOL_SMS_SECRET_KEY}
   from: ${COOL_SMS_FROM}
+
+kakao-address:
+  api-key: ${KAKAO_ADDRESS_API_KEY}

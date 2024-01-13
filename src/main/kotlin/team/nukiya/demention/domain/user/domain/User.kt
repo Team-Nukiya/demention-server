@@ -11,4 +11,16 @@ data class User(
     val address: Address,
     val authority: Authority = USER,
     val isDeleted: Boolean = false,
-)
+) {
+    companion object {
+        private const val NICK_NAME_LENGTH = 10
+
+        fun generateRandomNickName(): String {
+            val charSet = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+
+            return (1..NICK_NAME_LENGTH)
+                .map { charSet.random() }
+                .joinToString("")
+        }
+    }
+}

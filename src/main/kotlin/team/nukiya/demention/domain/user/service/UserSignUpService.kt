@@ -27,7 +27,7 @@ class UserSignUpService(
         val savedUser = userProcessor.saveUser(
             User(
                 phoneNumber = phoneNumber,
-                nickName = "김은오",
+                nickName = User.generateRandomNickName(),
                 address = address,
             )
         )

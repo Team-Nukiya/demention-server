@@ -14,9 +14,11 @@ data class AuthCode(
     }
 
     companion object {
+        const val CODE_LENGTH = 6
+
         fun generateRandomCode() =
             StringBuffer().apply {
-                repeat(6) {
+                repeat(CODE_LENGTH) {
                     this.append(Random.nextInt(9))
                 }
             }.toString()

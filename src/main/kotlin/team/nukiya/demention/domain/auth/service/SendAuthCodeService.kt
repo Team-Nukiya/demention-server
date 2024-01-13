@@ -3,7 +3,6 @@ package team.nukiya.demention.domain.auth.service
 import org.springframework.stereotype.Service
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.infrastructure.sms.SmsUtil
-import kotlin.random.Random
 
 @Service
 class SendAuthCodeService(
@@ -12,10 +11,10 @@ class SendAuthCodeService(
 ) {
 
     fun send(to: String) {
-        val code = AuthCode.generateRandomCode()
+        val randomCode = AuthCode.generateRandomCode()
 
         val authCode = AuthCode(
-            code = code,
+            code = randomCode,
             phoneNumber = to
         )
 

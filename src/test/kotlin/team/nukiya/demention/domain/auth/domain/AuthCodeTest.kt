@@ -1,8 +1,10 @@
 package team.nukiya.demention.domain.auth.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
+import team.nukiya.demention.domain.auth.domain.AuthCode.Companion.CODE_LENGTH
 import team.nukiya.demention.domain.auth.exception.WrongAuthCodeException
 
 class AuthCodeTest {
@@ -60,5 +62,14 @@ class AuthCodeTest {
         assertThrows<WrongAuthCodeException> {
             requestAuthCode.certifyAuthCode(savedAuthCode)
         }
+    }
+
+    @Test
+    fun `길이가 6인 무작위 숫자를 생성한다`() {
+        // when
+        val randomCode = AuthCode.generateRandomCode()
+
+        // then
+        assertThat(randomCode).isNotBlank().hasSize(CODE_LENGTH)
     }
 }

@@ -12,7 +12,7 @@ class SendAuthCodeService(
 ) {
 
     fun send(to: String) {
-        val code = Random.generateRandomCode()
+        val code = AuthCode.generateRandomCode()
 
         val authCode = AuthCode(
             code = code,
@@ -27,10 +27,3 @@ class SendAuthCodeService(
         )
     }
 }
-
-fun Random.generateRandomCode() =
-    StringBuffer().apply {
-        repeat(6) {
-            this.append(Random.nextInt(9))
-        }
-    }.toString()

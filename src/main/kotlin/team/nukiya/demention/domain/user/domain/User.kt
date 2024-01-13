@@ -13,7 +13,7 @@ data class User(
     val isDeleted: Boolean = false,
 ) {
     companion object {
-        private const val NICK_NAME_LENGTH = 10
+        const val NICK_NAME_LENGTH = 10
 
         fun generateRandomNickName(): String {
             val charSet = ('a'..'z') + ('A'..'Z') + ('0'..'9')

@@ -38,6 +38,7 @@ dependencies {
     testRuntimeOnly("com.h2database:h2")
     implementation("net.nurigo:javaSDK:2.2")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:5.2.1")
 }
 
 allOpen {

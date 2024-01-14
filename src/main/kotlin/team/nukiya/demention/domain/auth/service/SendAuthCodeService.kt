@@ -20,9 +20,6 @@ class SendAuthCodeService(
 
         val savedAuthCode = authCodeProcessor.saveAuthCode(authCode)
 
-        smsUtil.sendCode(
-            code = savedAuthCode.code,
-            to = savedAuthCode.phoneNumber
-        )
+        smsUtil.sendCode(savedAuthCode)
     }
 }

@@ -2,6 +2,7 @@ package team.nukiya.demention.infrastructure.sms.coolsms
 
 import net.nurigo.java_sdk.api.Message
 import org.springframework.stereotype.Component
+import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.infrastructure.sms.SmsUtil
 
 @Component
@@ -9,14 +10,14 @@ class CoolSmsUtil(
     private val coolSmsProperties: CoolSmsProperties,
 ) : SmsUtil {
 
-    override fun sendCode(code: String, to: String) {
+    override fun sendCode(authCode: AuthCode) {
         val message = Message(coolSmsProperties.apiKey, coolSmsProperties.secretKey)
 
         val params = HashMap<String, String>().apply {
-            this[TO] = to
+            this[TO] = authCode.phoneNumber
             this[FROM] = coolSmsProperties.from
             this[TYPE] = SMS
-            this[TEXT] = "${code}가 Demention 인증 코드입니다."
+            this[TEXT] = "${authCode.code}가 Demention 인증 코드입니다."
         }
 
         message.send(params)

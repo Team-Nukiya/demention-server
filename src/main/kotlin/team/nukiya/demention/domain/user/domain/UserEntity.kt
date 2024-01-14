@@ -13,7 +13,7 @@ import java.util.UUID
 @Entity
 class UserEntity(
 
-    override val id: UUID,
+    id: UUID,
 
     @NotNull
     @Column(columnDefinition = "CHAR(11)")

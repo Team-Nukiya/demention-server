@@ -10,13 +10,14 @@ class SendAuthCodeService(
     // TODO: private val smsUtil: SmsUtil,
 ) {
 
-    fun send(phoneNumber: String): String {
-        workAuthCodeLimit(phoneNumber = phoneNumber)
+    fun send(phoneNumber: String): Pair<Int, String> {
+        val limit = workAuthCodeLimit(phoneNumber = phoneNumber)
+        val code = workAuthCode(phoneNumber = phoneNumber)
 
-        return workAuthCode(phoneNumber = phoneNumber)
+        return Pair(limit, code)
     }
 
-    private fun workAuthCodeLimit(phoneNumber: String) {
+    private fun workAuthCodeLimit(phoneNumber: String): Int{
         val incrementLimit = authCodeProcessor.incrementLimit(phoneNumber = phoneNumber)
 
         val authCodeLimit = AuthCodeLimit(
@@ -24,7 +25,9 @@ class SendAuthCodeService(
             limit = incrementLimit,
         ).apply { checkOverLimit() }
 
-        authCodeProcessor.saveAuthCodeLimit(authCodeLimit)
+        val savedAuthCodeLimit = authCodeProcessor.saveAuthCodeLimit(authCodeLimit)
+
+        return savedAuthCodeLimit.limit
     }
 
     private fun workAuthCode(phoneNumber: String): String {

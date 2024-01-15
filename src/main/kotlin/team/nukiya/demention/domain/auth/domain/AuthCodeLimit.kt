@@ -14,6 +14,6 @@ data class AuthCodeLimit(
     }
 
     companion object {
-        private const val LIMIT = 5
+        const val LIMIT = 5
     }
 }

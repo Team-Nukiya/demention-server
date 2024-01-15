@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import team.nukiya.demention.domain.auth.controller.dto.SendAuthCodeRequest
+import team.nukiya.demention.domain.auth.controller.dto.SendAuthCodeResponse
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.domain.auth.service.CertifyAuthCodeService
 import team.nukiya.demention.domain.auth.service.SendAuthCodeService
@@ -23,8 +24,9 @@ class AuthController(
 ) {
 
     @PostMapping("/codes")
-    fun sendCode(@RequestBody @Valid request: SendAuthCodeRequest) {
-        sendAuthCodeService.send(request.to)
+    fun sendCode(@RequestBody @Valid request: SendAuthCodeRequest): SendAuthCodeResponse {
+        val code = sendAuthCodeService.send(request.to)
+        return SendAuthCodeResponse(code = code)
     }
 
     @GetMapping("/certified")

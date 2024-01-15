@@ -7,10 +7,10 @@ import team.nukiya.demention.infrastructure.sms.SmsUtil
 @Service
 class SendAuthCodeService(
     private val authCodeProcessor: AuthCodeProcessor,
-    private val smsUtil: SmsUtil,
+//    private val smsUtil: SmsUtil,
 ) {
 
-    fun send(to: String) {
+    fun send(to: String): String {
         val randomCode = AuthCode.generateRandomCode()
 
         val authCode = AuthCode(
@@ -20,6 +20,7 @@ class SendAuthCodeService(
 
         val savedAuthCode = authCodeProcessor.saveAuthCode(authCode)
 
-        smsUtil.sendCode(savedAuthCode)
+//        smsUtil.sendCode(savedAuthCode)
+        return savedAuthCode.code
     }
 }

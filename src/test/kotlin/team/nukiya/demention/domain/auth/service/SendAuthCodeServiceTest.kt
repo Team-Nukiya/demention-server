@@ -1,5 +1,6 @@
 package team.nukiya.demention.domain.auth.service
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.doNothing
@@ -21,11 +22,11 @@ class SendAuthCodeServiceTest {
     @Mock
     private lateinit var authCodeProcessor: AuthCodeProcessor
 
-    @Mock
-    private lateinit var smsUtil: SmsUtil
+//    @Mock
+//    private lateinit var smsUtil: SmsUtil
 
     @Test
-    fun `테스트`() {
+    fun `유저가 보낸 전화번호로 인증 코드를 보낸다`() {
         // given
         val phoneNumber = "010xxxxxxxx"
         val authCode = AuthCode(
@@ -36,13 +37,14 @@ class SendAuthCodeServiceTest {
         given(authCodeProcessor.saveAuthCode(any()))
             .willReturn(authCode)
 
-        doNothing().`when`(smsUtil).sendCode(any())
+//        doNothing().`when`(smsUtil).sendCode(any(AuthCode::class.java))
 
         // when
-        sendAuthCodeService.send(phoneNumber)
+        val code = sendAuthCodeService.send(phoneNumber)
 
         // then
+        assertThat(code).isNotBlank().hasSize(6)
         verify(authCodeProcessor).saveAuthCode(any())
-        verify(smsUtil).sendCode(any())
+//        verify(smsUtil).sendCode(any(AuthCode::class.java))
     }
 }

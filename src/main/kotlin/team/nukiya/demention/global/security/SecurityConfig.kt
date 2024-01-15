@@ -37,7 +37,7 @@ class SecurityConfig(
                 // user
                 it.requestMatchers(HttpMethod.POST, "$VERSION$USER_URL/sign-up").permitAll()
                 it.requestMatchers(HttpMethod.POST, "$VERSION$USER_URL/sign-in").permitAll()
-                it.anyRequest().denyAll()
+                it.anyRequest().permitAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(GlobalExceptionFilter(objectMapper), JwtFilter::class.java)

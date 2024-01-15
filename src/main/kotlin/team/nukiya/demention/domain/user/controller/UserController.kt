@@ -23,10 +23,7 @@ class UserController(
     fun signUp(@RequestBody @Valid request: UserSignUpRequest): TokenResponse =
         userSignUpService.signUp(
             phoneNumber = request.phoneNumber,
-            coordinate = Coordinate(
-                latitude = request.latitude,
-                longitude = request.longitude,
-            ),
+            coordinate = request.toCoordinate(),
         )
 
     @PostMapping("/sign-in")

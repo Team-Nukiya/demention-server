@@ -9,6 +9,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import team.nukiya.demention.domain.auth.domain.AuthCode
+import team.nukiya.demention.domain.auth.domain.AuthCodeLimit
 
 @ExtendWith(MockitoExtension::class)
 class CertifyAuthCodeServiceTest {
@@ -30,8 +31,16 @@ class CertifyAuthCodeServiceTest {
             phoneNumber = phoneNumber,
         )
 
+        val authCodeLimit = AuthCodeLimit(
+            phoneNumber = phoneNumber,
+            limit = 1,
+        )
+
         given(authCOdeReader.getAuthCodeByCode(anyString()))
             .willReturn(authCode)
+
+        given(authCOdeReader.getAuthCodeLimitByPhoneNumber(anyString()))
+            .willReturn(authCodeLimit)
 
         // when & then
         assertDoesNotThrow {

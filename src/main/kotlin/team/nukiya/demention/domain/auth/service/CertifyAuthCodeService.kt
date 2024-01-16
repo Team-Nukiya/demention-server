@@ -10,6 +10,9 @@ class CertifyAuthCodeService(
 
     fun certify(authCode: AuthCode) {
         authCodeReader.getAuthCodeByCode(authCode.code)
-            .apply { authCode.certifyAuthCode(this) }
+            .apply { this.certifyAuthCode(authCode) }
+
+        authCodeReader.getAuthCodeLimitByPhoneNumber(authCode.phoneNumber)
+            .apply { this.checkOverLimit() }
     }
 }

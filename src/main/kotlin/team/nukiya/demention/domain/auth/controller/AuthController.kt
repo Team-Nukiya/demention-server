@@ -25,8 +25,8 @@ class AuthController(
 
     @PostMapping("/codes")
     fun sendCode(@RequestBody @Valid request: SendAuthCodeRequest): SendAuthCodeResponse {
-        val code = sendAuthCodeService.send(request.to)
-        return SendAuthCodeResponse(code = code)
+        val (limit, code) = sendAuthCodeService.send(request.to)
+        return SendAuthCodeResponse(limit = limit, code = code)
     }
 
     @GetMapping("/certified")

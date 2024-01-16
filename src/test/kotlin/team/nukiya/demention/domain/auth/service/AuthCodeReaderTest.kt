@@ -57,7 +57,7 @@ class AuthCodeReaderTest {
         )
 
         given(authCodeEntityRepository.findByIdOrNull(anyString()))
-            .willReturn(authCodeEntity)
+            .willAnswer { Optional.of(authCodeEntity) }
 
         given(authCodeMapper.toDomain(any()))
             .willReturn(authCode)
@@ -99,7 +99,7 @@ class AuthCodeReaderTest {
         )
 
         given(authCodeLimitEntityRepository.findByIdOrNull(anyString()))
-            .willReturn(authCodeLimitEntity)
+            .willAnswer { Optional.of(authCodeLimitEntity) }
 
         given(authCodeLimitMapper.toDomain(any()))
             .willReturn(authCodeLimit)

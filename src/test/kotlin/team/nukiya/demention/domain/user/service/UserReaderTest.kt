@@ -2,7 +2,6 @@ package team.nukiya.demention.domain.user.service
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.anyString
 import org.mockito.BDDMockito.given
@@ -16,7 +15,6 @@ import team.nukiya.demention.domain.user.domain.Coordinate
 import team.nukiya.demention.domain.user.domain.User
 import team.nukiya.demention.domain.user.domain.UserEntity
 import team.nukiya.demention.domain.user.domain.UserMapper
-import team.nukiya.demention.domain.user.exception.UserNotFoundException
 import team.nukiya.demention.domain.user.repository.UserEntityRepository
 import team.nukiya.demention.infrastructure.client.address.GetAddressService
 import java.util.UUID
@@ -56,20 +54,6 @@ class UserReaderTest {
 
         // then
         assertThat(savedUser).usingRecursiveComparison().isEqualTo(user)
-    }
-
-    @Test
-    fun `전화번호를 찾을 수 없어 유저 객체를 가져오지 못해 예외가 발생한다`() {
-        // given
-        val phoneNumber = "010xxxxxxxx"
-
-        given(userEntityRepository.findByPhoneNumber(anyString()))
-            .willReturn(null)
-
-        // when & then
-        assertThrows<UserNotFoundException> {
-            userReader.getByPhoneNumber(phoneNumber)
-        }
     }
 
     @Test

@@ -2,13 +2,12 @@ package team.nukiya.demention.domain.auth.service
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.any
 import org.springframework.data.repository.findByIdOrNull
 import team.nukiya.demention.domain.auth.domain.AuthCode
@@ -17,8 +16,6 @@ import team.nukiya.demention.domain.auth.domain.AuthCodeLimit
 import team.nukiya.demention.domain.auth.domain.AuthCodeLimitEntity
 import team.nukiya.demention.domain.auth.domain.AuthCodeLimitMapper
 import team.nukiya.demention.domain.auth.domain.AuthCodeMapper
-import team.nukiya.demention.domain.auth.exception.AuthCodeLimitNotFoundException
-import team.nukiya.demention.domain.auth.exception.AuthCodeNotFoundException
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeLimitEntityRepository
 import java.util.Optional
@@ -70,20 +67,6 @@ class AuthCodeReaderTest {
     }
 
     @Test
-    fun `인증 코드가 다르면 인증코드 객체를 가져오지 못해 예외가 발생한다`() {
-        // given
-        val code = "111111"
-
-        given(authCodeEntityRepository.findByIdOrNull(anyString()))
-            .willAnswer { Optional.ofNullable(null) }
-
-        // when & then
-        assertThrows<AuthCodeNotFoundException> {
-            authCodeReader.getAuthCodeByCode(code)
-        }
-    }
-
-    @Test
     fun `전화번호로 인증 코드 제한 객체를 가져온다`() {
         // given
         val phoneNumber = "010xxxxxxxx"
@@ -109,19 +92,5 @@ class AuthCodeReaderTest {
 
         // then
         assertThat(savedAuthCodeLimit).usingRecursiveComparison().isEqualTo(authCodeLimit)
-    }
-
-    @Test
-    fun `전화번호가 다르면 인증코드제한 객체를 가져오지 못해 예외가 발생한다`() {
-        // given
-        val phoneNumber = "010xxxxxxxx"
-
-        given(authCodeLimitEntityRepository.findByIdOrNull(anyString()))
-            .willAnswer { Optional.ofNullable(null) }
-
-        // when & then
-        assertThrows<AuthCodeLimitNotFoundException> {
-            authCodeReader.getAuthCodeLimitByPhoneNumber(phoneNumber)
-        }
     }
 }

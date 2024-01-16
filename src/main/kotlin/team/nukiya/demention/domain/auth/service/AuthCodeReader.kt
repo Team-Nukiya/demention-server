@@ -23,7 +23,7 @@ class AuthCodeReader(
         } ?: throw AuthCodeNotFoundException
 
     fun getAuthCodeLimitByPhoneNumber(phoneNumber: String) =
-        authCodeLimitEntityRepository.findByPhoneNumber(phoneNumber)?.let {
+        authCodeLimitEntityRepository.findByIdOrNull(phoneNumber)?.let {
             authCodeLimitMapper.toDomain(it)
         } ?: throw AuthCodeLimitNotFoundException
 }

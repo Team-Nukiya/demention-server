@@ -3,6 +3,7 @@ package team.nukiya.demention.infrastructure.sms.coolsms
 import net.nurigo.java_sdk.api.Message
 import org.springframework.stereotype.Component
 import team.nukiya.demention.domain.auth.domain.AuthCode
+import team.nukiya.demention.global.exception.InternalServerErrorException
 import team.nukiya.demention.infrastructure.sms.SmsUtil
 
 @Component
@@ -20,7 +21,11 @@ class CoolSmsUtil(
             this[TEXT] = "${authCode.code}가 Demention 인증 코드입니다."
         }
 
-        message.send(params)
+        try {
+            message.send(params)
+        } catch (e: Exception) {
+            throw InternalServerErrorException
+        }
     }
 
     companion object {

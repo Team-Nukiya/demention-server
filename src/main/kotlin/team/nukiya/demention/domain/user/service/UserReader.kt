@@ -20,7 +20,6 @@ class UserReader(
             userMapper.toDomain(it)
         }
 
-
     fun existsByPhoneNumber(phoneNumber: String) =
         userEntityRepository.existsByPhoneNumber(phoneNumber)
 

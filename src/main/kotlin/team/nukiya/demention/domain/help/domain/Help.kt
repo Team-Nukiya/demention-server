@@ -16,4 +16,11 @@ data class Help(
     val helpEndDateTime: LocalDateTime,
     val createdDateTime: LocalDateTime,
     val modifiedDateTime: LocalDateTime,
-)
+) {
+
+    fun verifyIdentityVerification(userId: UUID) {
+        if (this.userId != userId) {
+            throw FailedIdentityVerification
+        }
+    }
+}

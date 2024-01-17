@@ -18,7 +18,7 @@ class UserMapper : GenericMapper<User, UserEntity> {
                 eupMyeonDong = entity.eupMyeonDong,
             ),
             authority = entity.authority,
-            isDeleted = entity.isDeleted,
+            deletedDateTime = entity.deletedDateTime,
         )
 
 
@@ -33,6 +33,6 @@ class UserMapper : GenericMapper<User, UserEntity> {
             gungu = domain.address.gungu,
             eupMyeonDong = domain.address.eupMyeonDong,
             authority = domain.authority,
-            isDeleted = domain.isDeleted,
+            deletedDateTime = domain.deletedDateTime,
         )
 }

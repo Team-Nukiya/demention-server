@@ -35,7 +35,6 @@ class UserEntityRepositoryTest {
             gungu = "유성구",
             eupMyeonDong = "장동",
             authority = USER,
-            isDeleted = false,
         )
 
         userEntityRepository.save(userEntity)
@@ -61,7 +60,6 @@ class UserEntityRepositoryTest {
             gungu = "유성구",
             eupMyeonDong = "장동",
             authority = USER,
-            isDeleted = false,
         )
 
         userEntityRepository.save(userEntity)

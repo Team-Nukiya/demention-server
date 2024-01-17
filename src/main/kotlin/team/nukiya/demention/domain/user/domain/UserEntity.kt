@@ -6,14 +6,13 @@ import jakarta.persistence.EnumType.STRING
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
-import team.nukiya.demention.global.entity.BaseEntity
 import team.nukiya.demention.global.entity.BaseUUIDEntity
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Table(name = "tbl_user")
 @Entity
 class UserEntity(
-
     id: UUID,
 
     @NotNull
@@ -48,11 +47,10 @@ class UserEntity(
     @Enumerated(STRING)
     val authority: Authority,
 
-    isDeleted: Boolean,
+    deletedDateTime: LocalDateTime? = null,
 ) : BaseUUIDEntity() {
 
-    @NotNull
-    @Column(columnDefinition = "BIT(1)")
-    var isDeleted = isDeleted
+    @Column(columnDefinition = "DATETIME(6)")
+    var deletedDateTime = deletedDateTime
         protected set
 }

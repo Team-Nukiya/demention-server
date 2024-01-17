@@ -1,6 +1,7 @@
 package team.nukiya.demention.domain.user.domain
 
 import team.nukiya.demention.domain.user.domain.Authority.USER
+import java.time.LocalDateTime
 import java.util.UUID
 
 data class User(
@@ -10,7 +11,7 @@ data class User(
     val name: String? = null,
     val address: Address,
     val authority: Authority = USER,
-    val isDeleted: Boolean = false,
+    val deletedDateTime: LocalDateTime? = null,
 ) {
     companion object {
         const val NICK_NAME_LENGTH = 10

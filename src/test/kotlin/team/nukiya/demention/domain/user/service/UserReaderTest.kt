@@ -101,7 +101,6 @@ class UserReaderTest {
         gungu = "유성구",
         eupMyeonDong = "장동",
         authority = USER,
-        isDeleted = false,
     )
 
     private fun createUser() = User(
@@ -111,7 +110,6 @@ class UserReaderTest {
         name = "강민",
         address = createAddress(),
         authority = USER,
-        isDeleted = false,
     )
 
     private fun createAddress() = Address(

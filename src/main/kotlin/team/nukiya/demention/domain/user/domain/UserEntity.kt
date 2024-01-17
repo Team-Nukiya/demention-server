@@ -6,7 +6,8 @@ import jakarta.persistence.EnumType.STRING
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
-import team.nukiya.demention.global.entity.BaseIdEntity
+import team.nukiya.demention.global.entity.BaseEntity
+import team.nukiya.demention.global.entity.BaseUUIDEntity
 import java.util.UUID
 
 @Table(name = "tbl_user")
@@ -48,7 +49,7 @@ class UserEntity(
     val authority: Authority,
 
     isDeleted: Boolean,
-) : BaseIdEntity() {
+) : BaseUUIDEntity() {
 
     @NotNull
     @Column(columnDefinition = "BIT(1)")

@@ -21,7 +21,7 @@ class HelpService(
         userId: UUID,
     ) {
         helpReader.getHelpById(helpId)
-            ?.apply { this.verifyIdentityVerification(userId = userId) }
+            ?.apply { verifyIdentityVerification(userId = userId) }
             ?: throw HelpNotFoundException
 
         helpProcessor.saveHelp(help)
@@ -29,7 +29,7 @@ class HelpService(
 
     fun deleteHelp(helpId: UUID, userId: UUID) {
         helpReader.getHelpById(helpId)
-            ?.apply { this.verifyIdentityVerification(userId = userId) }
+            ?.apply { verifyIdentityVerification(userId = userId) }
             ?: throw HelpNotFoundException
 
         helpProcessor.deleteHelpById(helpId)

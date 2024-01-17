@@ -9,14 +9,13 @@ import team.nukiya.demention.domain.auth.exception.AuthCodeNotFoundException
 class CertifyAuthCodeService(
     private val authCodeReader: AuthCodeReader,
 ) {
-
     fun certify(authCode: AuthCode) {
         authCodeReader.getAuthCodeLimitByPhoneNumber(authCode.phoneNumber)
-            ?.apply { this.checkOverLimit() }
+            ?.apply { checkOverLimit() }
             ?: throw AuthCodeLimitNotFoundException
 
         authCodeReader.getAuthCodeByCode(authCode.code)
-            ?.apply { this.certifyAuthCode(authCode) }
+            ?.apply { certifyAuthCode(authCode) }
             ?: throw AuthCodeNotFoundException
     }
 }

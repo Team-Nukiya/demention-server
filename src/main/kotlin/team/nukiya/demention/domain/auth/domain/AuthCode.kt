@@ -19,7 +19,7 @@ data class AuthCode(
         fun generateRandomCode() =
             StringBuffer().apply {
                 repeat(CODE_LENGTH) {
-                    this.append(Random.nextInt(9))
+                    append(Random.nextInt(9))
                 }
             }.toString()
     }

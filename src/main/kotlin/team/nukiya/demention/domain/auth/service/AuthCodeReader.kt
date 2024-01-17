@@ -14,7 +14,6 @@ class AuthCodeReader(
     private val authCodeLimitEntityRepository: AuthCodeLimitEntityRepository,
     private val authCodeLimitMapper: AuthCodeLimitMapper,
 ) {
-
     fun getAuthCodeByCode(code: String) =
         authCodeEntityRepository.findByIdOrNull(code)?.let {
             authCodeMapper.toDomain(it)

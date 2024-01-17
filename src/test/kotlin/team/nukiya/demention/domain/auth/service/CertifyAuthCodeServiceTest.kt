@@ -9,16 +9,13 @@ import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.data.repository.findByIdOrNull
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.domain.auth.domain.AuthCodeLimit
 import team.nukiya.demention.domain.auth.exception.AuthCodeLimitNotFoundException
 import team.nukiya.demention.domain.auth.exception.AuthCodeNotFoundException
-import java.util.Optional
 
 @ExtendWith(MockitoExtension::class)
 class CertifyAuthCodeServiceTest {
-
     @InjectMocks
     private lateinit var certifyAuthCodeService: CertifyAuthCodeService
 

@@ -1,6 +1,7 @@
 package team.nukiya.demention.domain.help.controller.dto
 
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import team.nukiya.demention.domain.help.domain.Help
 import java.time.LocalDateTime
@@ -19,10 +20,13 @@ data class UpdateHelpRequest(
     @Size(max = 15)
     val compensation: String,
 
+    @NotNull
     val helpImageUrl: String,
 
+    @NotNull
     val helpStartDateTime: LocalDateTime,
 
+    @NotNull
     val helpEndDateTime: LocalDateTime,
 ) {
     fun toHelp(userId: UUID) =

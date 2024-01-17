@@ -1,10 +1,8 @@
 package team.nukiya.demention.domain.user.service
 
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import team.nukiya.demention.domain.user.domain.Coordinate
-import team.nukiya.demention.domain.user.domain.User
 import team.nukiya.demention.domain.user.domain.UserMapper
 import team.nukiya.demention.domain.user.repository.UserEntityRepository
 import team.nukiya.demention.infrastructure.client.address.GetAddressService
@@ -27,8 +25,4 @@ class UserReader(
 
     fun getAddressByCoordinate(coordinate: Coordinate) =
         getAddressService.getAddressByCoordinate(coordinate)
-
-    fun getCurrentUser(): User {
-        return SecurityContextHolder.getContext().authentication.principal as User
-    }
 }

@@ -9,7 +9,6 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 class HelpTest {
-
     @Test
     fun `봉사 공고를 작성한 유저이다`() {
         // given

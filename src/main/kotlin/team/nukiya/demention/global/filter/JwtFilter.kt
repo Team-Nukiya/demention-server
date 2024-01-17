@@ -12,7 +12,6 @@ import team.nukiya.demention.infrastructure.jwt.JwtParser
 class JwtFilter(
     private val jwtParser: JwtParser
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,

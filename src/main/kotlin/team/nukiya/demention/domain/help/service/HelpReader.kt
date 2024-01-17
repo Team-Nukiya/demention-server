@@ -13,7 +13,6 @@ class HelpReader(
     private val helpEntityRepository: HelpEntityRepository,
     private val helpMapper: HelpMapper,
 ) {
-
     fun getHelpById(helpId: UUID) =
         helpEntityRepository.findByIdOrNull(helpId)
             ?.let { helpMapper.toDomain(it) }

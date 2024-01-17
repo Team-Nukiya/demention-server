@@ -8,7 +8,6 @@ import team.nukiya.demention.domain.auth.domain.AuthCode.Companion.CODE_LENGTH
 import team.nukiya.demention.domain.auth.exception.WrongAuthCodeException
 
 class AuthCodeTest {
-
     @Test
     internal fun `유저가 보낸 인증 코드와 유저가 발급 받은 코드가 같다`() {
         // given

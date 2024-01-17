@@ -10,7 +10,6 @@ class UserSignInService(
     private val userReader: UserReader,
     private val jwtProvider: JwtProvider,
 ) {
-
     fun signIn(phoneNumber: String): TokenResponse {
         val savedUser = userReader.getByPhoneNumber(phoneNumber)
             ?: throw UserNotFoundException

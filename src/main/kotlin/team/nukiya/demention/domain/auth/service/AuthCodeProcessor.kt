@@ -17,7 +17,6 @@ class AuthCodeProcessor(
     private val authCodeLimitMapper: AuthCodeLimitMapper,
     private val redisTemplate: RedisTemplate<String, String>,
 ) {
-
     fun saveAuthCode(authCode: AuthCode) =
         authCodeEntityRepository.save(
             authCodeMapper.toEntity(authCode)

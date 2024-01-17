@@ -23,7 +23,6 @@ class SecurityConfig(
     private val jwtParser: JwtParser,
     private val objectMapper: ObjectMapper,
 ) {
-
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http

@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets
 class GlobalExceptionFilter(
     private val objectMapper: ObjectMapper
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,

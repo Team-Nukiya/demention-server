@@ -6,7 +6,6 @@ data class AuthCodeLimit(
     val phoneNumber: String,
     val limit: Int,
 ) {
-
     fun checkOverLimit() {
         if (this.limit > LIMIT) {
             throw AuthCodeOverLimitException

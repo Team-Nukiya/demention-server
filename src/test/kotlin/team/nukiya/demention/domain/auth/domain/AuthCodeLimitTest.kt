@@ -6,7 +6,6 @@ import org.junit.jupiter.api.assertThrows
 import team.nukiya.demention.domain.auth.exception.AuthCodeOverLimitException
 
 class AuthCodeLimitTest {
-
     @Test
     fun `인증 코드 요청 횟수가 5번 이하다`() {
         // given

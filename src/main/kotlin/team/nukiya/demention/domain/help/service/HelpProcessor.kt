@@ -13,13 +13,12 @@ class HelpProcessor(
     private val helpEntityRepository: HelpEntityRepository,
     private val helpMapper: HelpMapper,
 ) {
-
     fun saveHelp(help: Help) =
         helpEntityRepository.save(
             helpMapper.toEntity(help)
         ).let { helpMapper.toDomain(it) }
 
-    fun deleteHelpById(helpId: UUID) {
+    fun removeHelpById(helpId: UUID) {
         helpEntityRepository.deleteById(helpId)
     }
 }

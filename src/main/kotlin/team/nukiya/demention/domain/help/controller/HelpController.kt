@@ -20,13 +20,12 @@ import java.util.UUID
 class HelpController(
     private val helpService: HelpService,
 ) {
-
     @PostMapping
     fun createHelp(
         @RequestBody @Valid request: CreateHelpRequest,
         @AuthenticationPrincipal provider: AuthDetails,
     ) {
-        helpService.createHelp(
+        helpService.create(
             help = request.toHelp(
                 userId = UUID.fromString(provider.username)
             ),
@@ -34,13 +33,13 @@ class HelpController(
     }
 
     @PatchMapping("/{$HELP_ID}")
-    fun updateHelp(
+    fun modifyHelp(
         @RequestBody @Valid request: UpdateHelpRequest,
         @PathVariable(HELP_ID) helpId: UUID,
         @AuthenticationPrincipal provider: AuthDetails,
     ) {
         val userId = UUID.fromString(provider.username)
-        helpService.updateHelp(
+        helpService.modify(
             help = request.toHelp(
                 userId = userId
             ),
@@ -50,11 +49,11 @@ class HelpController(
     }
 
     @DeleteMapping("/{$HELP_ID}")
-    fun deleteHelp(
+    fun removeHelp(
         @PathVariable(HELP_ID) helpId: UUID,
         @AuthenticationPrincipal provider: AuthDetails,
     ) {
-        helpService.deleteHelp(
+        helpService.remove(
             helpId = helpId,
             userId = UUID.fromString(provider.username)
         )

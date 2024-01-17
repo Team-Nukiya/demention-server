@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(name = "kakaoAddressFeignClient", url = "https://dapi.kakao.com")
 interface KakaoAddressFeignClient {
-
     @GetMapping("/v2/local/geo/coord2address.json")
     fun getAddressByCoordinate(
         @RequestHeader("Authorization") apiKey: String,

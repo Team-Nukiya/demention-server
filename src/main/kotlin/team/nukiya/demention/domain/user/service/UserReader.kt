@@ -14,7 +14,6 @@ class UserReader(
     private val userMapper: UserMapper,
     private val getAddressService: GetAddressService,
 ) {
-
     fun getByPhoneNumber(phoneNumber: String) =
         userEntityRepository.findByPhoneNumber(phoneNumber)?.let {
             userMapper.toDomain(it)

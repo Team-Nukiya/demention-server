@@ -13,7 +13,6 @@ class UserSignUpService(
     private val userProcessor: UserProcessor,
     private val jwtProvider: JwtProvider,
 ) {
-
     fun signUp(
         phoneNumber: String,
         coordinate: Coordinate,

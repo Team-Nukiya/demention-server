@@ -12,7 +12,6 @@ class UserProcessor(
     private val userEntityRepository: UserEntityRepository,
     private val userMapper: UserMapper,
 ) {
-
     fun saveUser(user: User): User =
         userEntityRepository.save(
             userMapper.toEntity(user)

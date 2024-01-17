@@ -17,7 +17,6 @@ import java.util.UUID
 @Table(name = "tbl_help")
 @Entity
 class HelpEntity(
-
     id: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,5 +54,4 @@ class HelpEntity(
     createdDateTime: LocalDateTime,
 
     modifiedDateTime: LocalDateTime
-
 ) : BaseEntity()

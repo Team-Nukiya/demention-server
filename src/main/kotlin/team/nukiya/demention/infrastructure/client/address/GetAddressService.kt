@@ -9,7 +9,6 @@ class GetAddressService(
     private val kakaoAddressProperties: KakaoAddressProperties,
     private val kakaoAddressFeignClient: KakaoAddressFeignClient,
 ) {
-
     fun getAddressByCoordinate(coordinate: Coordinate): Address {
         val addressResponse = kakaoAddressFeignClient.getAddressByCoordinate(
             apiKey = kakaoAddressProperties.apiKey,

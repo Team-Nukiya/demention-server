@@ -18,7 +18,6 @@ class UserController(
     private val userSignUpService: UserSignUpService,
     private val userSignInService: UserSignInService,
 ) {
-
     @PostMapping("/sign-up")
     fun signUp(@RequestBody @Valid request: UserSignUpRequest): TokenResponse =
         userSignUpService.signUp(

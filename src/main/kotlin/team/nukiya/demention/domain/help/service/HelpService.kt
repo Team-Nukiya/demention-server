@@ -10,12 +10,11 @@ class HelpService(
     private val helpProcessor: HelpProcessor,
     private val helpReader: HelpReader,
 ) {
-
-    fun createHelp(help: Help) {
+    fun create(help: Help) {
         helpProcessor.saveHelp(help)
     }
 
-    fun updateHelp(
+    fun modify(
         helpId: UUID,
         help: Help,
         userId: UUID,
@@ -27,11 +26,11 @@ class HelpService(
         helpProcessor.saveHelp(help)
     }
 
-    fun deleteHelp(helpId: UUID, userId: UUID) {
+    fun remove(helpId: UUID, userId: UUID) {
         helpReader.getHelpById(helpId)
             ?.apply { verifyIdentityVerification(userId = userId) }
             ?: throw HelpNotFoundException
 
-        helpProcessor.deleteHelpById(helpId)
+        helpProcessor.removeHelpById(helpId)
     }
 }

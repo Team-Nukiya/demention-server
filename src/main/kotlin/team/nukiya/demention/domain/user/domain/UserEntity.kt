@@ -49,7 +49,6 @@ class UserEntity(
 
     deletedDateTime: LocalDateTime? = null,
 ) : BaseUUIDEntity() {
-
     @Column(columnDefinition = "DATETIME(6)")
     var deletedDateTime = deletedDateTime
         protected set

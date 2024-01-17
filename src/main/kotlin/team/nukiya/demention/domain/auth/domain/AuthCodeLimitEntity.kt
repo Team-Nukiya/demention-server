@@ -5,7 +5,6 @@ import org.springframework.data.redis.core.RedisHash
 
 @RedisHash(timeToLive = 1800)
 class AuthCodeLimitEntity(
-
     @Id
     val phoneNumber: String,
 

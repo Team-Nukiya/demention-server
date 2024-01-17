@@ -7,9 +7,8 @@ import team.nukiya.demention.domain.auth.domain.AuthCodeLimit
 @Service
 class SendAuthCodeService(
     private val authCodeProcessor: AuthCodeProcessor,
-    // TODO: private val smsUtil: SmsUtil,
+    // TODO: SMS
 ) {
-
     fun send(phoneNumber: String): Pair<Int, String> {
         val limit = workAuthCodeLimit(phoneNumber = phoneNumber)
         val code = workAuthCode(phoneNumber = phoneNumber)
@@ -17,7 +16,7 @@ class SendAuthCodeService(
         return Pair(limit, code)
     }
 
-    private fun workAuthCodeLimit(phoneNumber: String): Int{
+    private fun workAuthCodeLimit(phoneNumber: String): Int {
         val incrementLimit = authCodeProcessor.incrementLimit(phoneNumber = phoneNumber)
 
         val authCodeLimit = AuthCodeLimit(

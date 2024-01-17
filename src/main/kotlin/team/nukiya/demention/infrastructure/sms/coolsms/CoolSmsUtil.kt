@@ -10,7 +10,6 @@ import team.nukiya.demention.infrastructure.sms.SmsUtil
 class CoolSmsUtil(
     private val coolSmsProperties: CoolSmsProperties,
 ) : SmsUtil {
-
     override fun sendCode(authCode: AuthCode) {
         val message = Message(coolSmsProperties.apiKey, coolSmsProperties.secretKey)
 

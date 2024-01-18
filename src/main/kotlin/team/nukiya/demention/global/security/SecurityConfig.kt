@@ -43,6 +43,8 @@ class SecurityConfig(
                 it.requestMatchers(POST, "$VERSION$HELP_URL").authenticated()
                 it.requestMatchers(PATCH, "$VERSION$HELP_URL$HELP_ID").authenticated()
                 it.requestMatchers(DELETE, "$VERSION$HELP_URL$HELP_ID").authenticated()
+                it.requestMatchers(GET, "$VERSION$HELP_URL$HELP_ID").authenticated()
+                it.requestMatchers(GET, "$VERSION$HELP_URL").authenticated()
                 it.anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)

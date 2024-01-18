@@ -1,7 +1,10 @@
 package team.nukiya.demention.domain.help.service
 
 import org.springframework.stereotype.Service
+import team.nukiya.demention.domain.help.domain.AllHelp
 import team.nukiya.demention.domain.help.domain.Help
+import team.nukiya.demention.domain.help.domain.HelpDetails
+import team.nukiya.demention.domain.help.domain.HelpStatus
 import team.nukiya.demention.domain.help.exception.HelpNotFoundException
 import java.util.UUID
 
@@ -33,4 +36,14 @@ class HelpService(
 
         helpProcessor.removeHelpById(helpId)
     }
+
+    fun getDetails(helpId: UUID): HelpDetails =
+        helpReader.getHelpDetailsById(helpId = helpId) ?: throw HelpNotFoundException
+
+    fun getAll(helpStatus: HelpStatus, page: Long, limit: Long): List<AllHelp> =
+        helpReader.getAllHelps(
+            helpStatus = helpStatus,
+            page = page,
+            limit = limit,
+        )
 }

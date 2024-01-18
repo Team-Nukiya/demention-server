@@ -8,6 +8,7 @@ import team.nukiya.demention.domain.auth.domain.AuthCodeLimitMapper
 import team.nukiya.demention.domain.auth.domain.AuthCodeMapper
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeEntityRepository
 import team.nukiya.demention.domain.auth.repisitory.AuthCodeLimitEntityRepository
+import java.time.Duration
 
 @Component
 class AuthCodeProcessor(
@@ -27,7 +28,11 @@ class AuthCodeProcessor(
             authCodeLimitMapper.toEntity(authCodeLimit)
         ).let { authCodeLimitMapper.toDomain(it) }
 
-    fun incrementLimit(phoneNumber: String) =
-        redisTemplate.opsForValue()
+    fun incrementLimit(phoneNumber: String): Int {
+        redisTemplate.expire(phoneNumber, Duration.ofMinutes(30))
+
+        return redisTemplate.opsForValue()
             .increment(phoneNumber)!!.toInt()
+    }
+
 }

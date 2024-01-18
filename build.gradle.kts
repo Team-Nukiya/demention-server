@@ -7,6 +7,7 @@ plugins {
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.spring") version "1.9.21"
     kotlin("plugin.jpa") version "1.9.21"
+    kotlin("kapt") version "1.8.21"
 }
 
 group = "team.nukiya"
@@ -39,6 +40,10 @@ dependencies {
     implementation("net.nurigo:javaSDK:2.2")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     testImplementation ("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+    kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
+    kapt("jakarta.annotation:jakarta.annotation-api")
+    kapt("jakarta.persistence:jakarta.persistence-api")
 }
 
 allOpen {

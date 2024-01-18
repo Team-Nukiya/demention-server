@@ -1,13 +1,17 @@
 package team.nukiya.demention.domain.help.service
 
+import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import team.nukiya.demention.domain.help.domain.AllHelp
-import team.nukiya.demention.domain.help.domain.AllHelp.Companion.LIMIT
 import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpMapper
+import team.nukiya.demention.domain.help.domain.HelpStatus
+import team.nukiya.demention.domain.help.domain.HelpStatus.ALL
+import team.nukiya.demention.domain.help.domain.HelpStatus.DONE
+import team.nukiya.demention.domain.help.domain.HelpStatus.HELPING
 import team.nukiya.demention.domain.help.domain.QHelpEntity.helpEntity
 import team.nukiya.demention.domain.help.domain.QQueryAllHelp
 import team.nukiya.demention.domain.help.domain.QQueryHelpDetailsVO
@@ -47,7 +51,11 @@ class HelpReader(
             .join(helpEntity.userEntity, userEntity)
             .fetchOne()
 
-    fun getAllHelps(page: Long): List<AllHelp> =
+    fun getAllHelps(
+        helpStatus: HelpStatus,
+        page: Long,
+        limit: Long,
+    ): List<AllHelp> =
         jpaQueryFactory
             .select(
                 QQueryAllHelp(
@@ -63,7 +71,15 @@ class HelpReader(
             )
             .from(helpEntity)
             .join(helpEntity.userEntity, userEntity)
+            .where(helpStatusEq(helpStatus))
             .offset(page)
-            .limit(LIMIT)
+            .limit(limit)
             .fetch()
+
+    private fun helpStatusEq(helpStatus: HelpStatus): BooleanExpression? =
+        when (helpStatus) {
+            ALL -> helpEntity.helpStatus.`in`(listOf(HELPING, DONE))
+            HELPING -> helpEntity.helpStatus.eq(HELPING)
+            DONE -> helpEntity.helpStatus.eq(DONE)
+        }
 }

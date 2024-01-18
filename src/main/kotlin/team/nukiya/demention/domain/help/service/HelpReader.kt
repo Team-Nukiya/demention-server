@@ -4,10 +4,13 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import team.nukiya.demention.domain.help.domain.AllHelp
+import team.nukiya.demention.domain.help.domain.AllHelp.Companion.LIMIT
 import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpMapper
-import team.nukiya.demention.domain.help.domain.QQueryHelpDetailsVO
 import team.nukiya.demention.domain.help.domain.QHelpEntity.helpEntity
+import team.nukiya.demention.domain.help.domain.QQueryAllHelp
+import team.nukiya.demention.domain.help.domain.QQueryHelpDetailsVO
 import team.nukiya.demention.domain.help.repository.HelpEntityRepository
 import team.nukiya.demention.domain.user.domain.QUserEntity.userEntity
 import java.util.UUID
@@ -43,4 +46,24 @@ class HelpReader(
             .from(helpEntity)
             .join(helpEntity.userEntity, userEntity)
             .fetchOne()
+
+    fun getAllHelps(page: Long): List<AllHelp> =
+        jpaQueryFactory
+            .select(
+                QQueryAllHelp(
+                    helpEntity.id,
+                    helpEntity.title,
+                    helpEntity.compensation,
+                    helpEntity.helpImageUrl,
+                    helpEntity.helpStartDateTime,
+                    helpEntity.helpEndDateTime,
+                    userEntity.addressName,
+                    userEntity.nickName,
+                )
+            )
+            .from(helpEntity)
+            .join(helpEntity.userEntity, userEntity)
+            .offset(page)
+            .limit(LIMIT)
+            .fetch()
 }

@@ -1,14 +1,16 @@
 package team.nukiya.demention.domain.help.service
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.groups.Tuple.tuple
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import team.nukiya.demention.domain.help.domain.AllHelp
 import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpEntity
+import team.nukiya.demention.domain.help.domain.HelpStatus.ALL
 import team.nukiya.demention.domain.help.domain.HelpStatus.HELPING
-import team.nukiya.demention.domain.help.domain.QueryHelpDetailsVO
 import team.nukiya.demention.domain.help.repository.HelpEntityRepository
 import team.nukiya.demention.domain.user.domain.Authority
 import team.nukiya.demention.domain.user.domain.UserEntity
@@ -61,6 +63,65 @@ class HelpReaderTest {
         // then
         assertThat(result).usingRecursiveComparison().isEqualTo(helpDetails)
     }
+
+    @Test
+    fun `공고 상태, 페이지, 페이지 개수를 기준으로 공고 리스트를 가져온다`() {
+        // given
+        val userEntity = createUserEntity()
+        userEntityRepository.save(userEntity)
+
+        val helpStartDateTime = LocalDateTime.of(2024, 1, 18, 0, 0)
+        val helpEndDateTime = LocalDateTime.of(2024, 1, 19, 0, 0)
+
+        val helpIds = mutableListOf<UUID>()
+        repeat(3) {
+            val helpEntity = createHelpEntity(
+                userEntity = userEntity,
+                helpStartDateTime = helpStartDateTime,
+                helpEndDateTime = helpEndDateTime,
+            )
+            val savedHelpEntity = helpEntityRepository.save(helpEntity)
+            helpIds.add(savedHelpEntity.id)
+        }
+        // when
+        val savedAllHelps = helpReader.getAllHelps(ALL, 0, 3)
+
+        // then
+        assertThat(savedAllHelps)
+            .hasSize(3)
+            .extracting(
+                "id",
+                "title",
+                "compensation",
+                "helpStartDateTime",
+                "helpEndDateTime",
+                "userAddressName",
+                "userNickName"
+            )
+            .containsExactlyInAnyOrder(
+                tuple(helpIds[0], "약이 필요합니다.", "1만 원", helpStartDateTime, helpEndDateTime, "대전광역시 유성구 장동 23-9 ", "강민"),
+                tuple(helpIds[1], "약이 필요합니다.", "1만 원", helpStartDateTime, helpEndDateTime, "대전광역시 유성구 장동 23-9 ", "강민"),
+                tuple(helpIds[2], "약이 필요합니다.", "1만 원", helpStartDateTime, helpEndDateTime, "대전광역시 유성구 장동 23-9 ", "강민"),
+            )
+
+    }
+
+    private fun createAllHelp(
+        helpId: UUID,
+        helpStartDateTime: LocalDateTime,
+        helpEndDateTime: LocalDateTime,
+    ) =
+        AllHelp(
+            id = helpId,
+            title = "약이 필요합니다.",
+            compensation = "1만 원",
+            helpImageUrl = "이미지 링크",
+            helpStartDateTime = helpStartDateTime,
+            helpEndDateTime = helpEndDateTime,
+            userAddressName = "대전광역시 유성구 장동 23-9 ",
+            userNickName = "강민",
+        )
+
 
     private fun createUserEntity() =
         UserEntity(

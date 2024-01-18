@@ -12,7 +12,6 @@ import java.util.UUID
 // TODO: @DataJpaTest 사용하면 에러남
 @SpringBootTest
 class UserEntityRepositoryTest {
-
     @Autowired
     private lateinit var userEntityRepository: UserEntityRepository
 

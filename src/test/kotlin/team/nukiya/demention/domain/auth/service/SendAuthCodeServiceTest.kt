@@ -60,16 +60,6 @@ class SendAuthCodeServiceTest {
         // given
         val phoneNumber = "010xxxxxxxx"
 
-        val authCodeLimit = AuthCodeLimit(
-            phoneNumber = phoneNumber,
-            limit = LIMIT + 1,
-        )
-
-        val authCode = AuthCode(
-            code = "111111",
-            phoneNumber = phoneNumber,
-        )
-
         given(authCodeProcessor.incrementLimit(anyString()))
             .willReturn(LIMIT + 1)
 

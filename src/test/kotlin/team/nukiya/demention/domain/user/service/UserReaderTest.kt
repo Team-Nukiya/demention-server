@@ -21,7 +21,6 @@ import java.util.UUID
 
 @ExtendWith(MockitoExtension::class)
 class UserReaderTest {
-
     @InjectMocks
     private lateinit var userReader: UserReader
 

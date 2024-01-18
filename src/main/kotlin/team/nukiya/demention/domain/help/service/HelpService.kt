@@ -1,6 +1,7 @@
 package team.nukiya.demention.domain.help.service
 
 import org.springframework.stereotype.Service
+import team.nukiya.demention.domain.help.domain.AllHelp
 import team.nukiya.demention.domain.help.domain.Help
 import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.exception.HelpNotFoundException
@@ -37,4 +38,7 @@ class HelpService(
 
     fun getDetails(helpId: UUID): HelpDetails =
         helpReader.getHelpDetailsById(helpId = helpId) ?: throw HelpNotFoundException
+
+    fun getAll(page: Long): List<AllHelp> =
+        helpReader.getAllHelps(page = page)
 }

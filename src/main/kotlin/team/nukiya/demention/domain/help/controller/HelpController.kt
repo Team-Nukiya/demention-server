@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import team.nukiya.demention.domain.help.controller.HelpController.Companion.HELP_ID
 import team.nukiya.demention.domain.help.controller.dto.CreateHelpRequest
+import team.nukiya.demention.domain.help.controller.dto.GetAllHelpsResponse
+import team.nukiya.demention.domain.help.controller.dto.GetHelpDetailsResponse
 import team.nukiya.demention.domain.help.controller.dto.UpdateHelpRequest
-import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.service.HelpService
 import team.nukiya.demention.global.security.auth.AuthDetails
 import java.util.UUID
@@ -63,8 +64,17 @@ class HelpController(
     }
 
     @GetMapping("/{${HELP_ID}}")
-    fun getHelpDetails(@PathVariable(HELP_ID) helpId: UUID): HelpDetails =
-        helpService.getDetails(helpId = helpId)
+    fun getHelpDetails(@PathVariable(HELP_ID) helpId: UUID): GetHelpDetailsResponse {
+        val helpDetails = helpService.getDetails(helpId = helpId)
+        return GetHelpDetailsResponse(helpDetails = helpDetails)
+    }
+
+
+    @GetMapping
+    fun getAllHelps(@RequestParam(defaultValue = "0") page: Long): GetAllHelpsResponse {
+        val allHelps = helpService.getAll(page = page)
+        return GetAllHelpsResponse(allHelps = allHelps)
+    }
 
     companion object {
         private const val HELP_ID = "help-id"

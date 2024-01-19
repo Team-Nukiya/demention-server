@@ -17,6 +17,6 @@ class AuthDetailsService(
     override fun loadUserByUsername(username: String): UserDetails {
         val userId = UUID.fromString(username)
         val user = userEntityRepository.findByIdOrNull(userId) ?: throw UserNotFoundException
-        return AuthDetails(userMapper.toDomain(user)!!)
+        return AuthDetails(userMapper.toDomain(user))
     }
 }

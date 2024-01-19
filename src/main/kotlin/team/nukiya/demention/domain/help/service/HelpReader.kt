@@ -17,6 +17,7 @@ import team.nukiya.demention.domain.help.domain.QQueryAllHelp
 import team.nukiya.demention.domain.help.domain.QQueryHelpDetailsVO
 import team.nukiya.demention.domain.help.repository.HelpEntityRepository
 import team.nukiya.demention.domain.user.domain.QUserEntity.userEntity
+import team.nukiya.demention.global.dto.Paging
 import java.util.UUID
 
 @Transactional(readOnly = true)
@@ -54,8 +55,7 @@ class HelpReader(
     fun getAllHelps(
         helpStatus: HelpStatus,
         sido: String,
-        page: Long,
-        limit: Long,
+        paging: Paging,
     ): List<AllHelp> =
         jpaQueryFactory
             .select(
@@ -76,8 +76,8 @@ class HelpReader(
                 helpStatusEq(helpStatus),
                 userEntity.sido.eq(sido),
             )
-            .offset(page)
-            .limit(limit)
+            .offset(paging.page)
+            .limit(paging.limit)
             .fetch()
 
     private fun helpStatusEq(helpStatus: HelpStatus): BooleanExpression? =

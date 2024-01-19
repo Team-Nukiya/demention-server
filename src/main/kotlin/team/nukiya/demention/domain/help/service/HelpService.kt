@@ -7,6 +7,7 @@ import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpStatus
 import team.nukiya.demention.domain.help.exception.HelpNotFoundException
 import team.nukiya.demention.domain.user.domain.User
+import team.nukiya.demention.global.dto.Paging
 import java.util.UUID
 
 @Service
@@ -43,14 +44,12 @@ class HelpService(
 
     fun getAll(
         helpStatus: HelpStatus,
-        page: Long,
-        limit: Long,
         currentUser: User,
+        paging: Paging,
     ): List<AllHelp> =
         helpReader.getAllHelps(
             helpStatus = helpStatus,
             sido = currentUser.address.sido,
-            page = page,
-            limit = limit,
+            paging = paging,
         )
 }

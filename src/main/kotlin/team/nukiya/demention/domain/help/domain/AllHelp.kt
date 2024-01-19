@@ -14,6 +14,6 @@ open class AllHelp(
     val userNickName: String,
 ) {
     companion object {
-        const val LIMIT = 10L
+        const val DEFAULT_LIMIT = 10L
     }
 }

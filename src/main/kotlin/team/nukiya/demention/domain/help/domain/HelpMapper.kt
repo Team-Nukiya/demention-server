@@ -36,8 +36,6 @@ class HelpMapper(
             helpStatus = domain.helpStatus,
             helpStartDateTime = domain.helpStartDateTime,
             helpEndDateTime = domain.helpEndDateTime,
-            createdDateTime = domain.createdDateTime,
-            modifiedDateTime = domain.modifiedDateTime,
         )
     }
 }

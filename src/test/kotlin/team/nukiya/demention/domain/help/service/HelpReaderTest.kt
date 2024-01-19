@@ -152,8 +152,6 @@ class HelpReaderTest {
             helpStatus = HELPING,
             helpStartDateTime = helpStartDateTime,
             helpEndDateTime = helpEndDateTime,
-            createdDateTime = LocalDateTime.now(),
-            modifiedDateTime = LocalDateTime.now(),
         )
 
     private fun createHelpDetails(

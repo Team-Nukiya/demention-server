@@ -8,11 +8,15 @@ data class User(
     val id: UUID = UUID.randomUUID(),
     val phoneNumber: String,
     val nickName: String,
-    val name: String? = null,
+    var name: String? = null,
     val address: Address,
     val authority: Authority = USER,
     val deletedDateTime: LocalDateTime? = null,
 ) {
+    fun updateName(name: String) {
+        this.name = name
+    }
+
     companion object {
         const val NICK_NAME_LENGTH = 10
 

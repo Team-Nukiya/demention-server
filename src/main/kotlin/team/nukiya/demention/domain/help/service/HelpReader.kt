@@ -53,6 +53,7 @@ class HelpReader(
 
     fun getAllHelps(
         helpStatus: HelpStatus,
+        sido: String,
         page: Long,
         limit: Long,
     ): List<AllHelp> =
@@ -71,7 +72,10 @@ class HelpReader(
             )
             .from(helpEntity)
             .join(helpEntity.userEntity, userEntity)
-            .where(helpStatusEq(helpStatus))
+            .where(
+                helpStatusEq(helpStatus),
+                userEntity.sido.eq(sido),
+            )
             .offset(page)
             .limit(limit)
             .fetch()

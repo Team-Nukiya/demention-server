@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import team.nukiya.demention.domain.user.domain.User
 
 class AuthDetails(
-    private val user: User,
+    val user: User,
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
         mutableListOf(SimpleGrantedAuthority(user.authority.name))

@@ -71,18 +71,18 @@ class HelpController(
     fun getHelpDetails(@PathVariable(HELP_ID) helpId: UUID): HelpDetails =
         helpService.getDetails(helpId = helpId)
 
-
-
     @GetMapping
     fun getAllHelps(
         @NotNull @RequestParam("help-status") helpStatus: HelpStatus,
+        @AuthenticationPrincipal provider: AuthDetails,
         @RequestParam(defaultValue = "0") page: Long,
         @RequestParam(defaultValue = "10") limit: Long,
     ): GetAllHelpsResponse {
         val helps = helpService.getAll(
             helpStatus = helpStatus,
             page = page,
-            limit = limit
+            limit = limit,
+            currentUser = provider.user
         )
         return GetAllHelpsResponse(helps = helps)
     }

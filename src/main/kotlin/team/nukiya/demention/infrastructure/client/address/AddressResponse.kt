@@ -3,14 +3,12 @@ package team.nukiya.demention.infrastructure.client.address
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class AddressResponse(
-    val documents: List<AddressElements>,
-)
-
-data class AddressElements(
-    val address: AddressElement,
+    val documents: List<AddressElement>,
 )
 
 data class AddressElement(
+    @JsonProperty("region_type")
+    val regionType: String,
     @JsonProperty("address_name")
     val addressName: String,
     @JsonProperty("region_1depth_name")

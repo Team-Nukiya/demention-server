@@ -16,13 +16,19 @@ class GetAddressService(
             y = coordinate.latitude,
         )
 
-        return addressResponse.documents[0].address.let {
-            Address(
-                addressName = it.addressName,
-                sido = it.sido,
-                gungu = it.gungu,
-                eupMyeonDong = it.eupMyeonDong,
-            )
-        }
+        return addressResponse.documents
+            .filter { it.regionType == HANGJUNGDONG }
+            .map {
+                Address(
+                    addressName = it.addressName,
+                    sido = it.sido,
+                    gungu = it.gungu,
+                    eupMyeonDong = it.eupMyeonDong,
+                )
+            }.first()
+    }
+
+    companion object {
+        private const val HANGJUNGDONG = "H"
     }
 }

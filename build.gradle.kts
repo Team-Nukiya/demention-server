@@ -60,7 +60,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+//    useJUnitPlatform()
 }
 
 val asciidoctorExt: Configuration by configurations.creating

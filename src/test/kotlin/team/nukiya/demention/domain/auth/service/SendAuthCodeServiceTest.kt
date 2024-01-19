@@ -60,8 +60,17 @@ class SendAuthCodeServiceTest {
         // given
         val phoneNumber = "010xxxxxxxx"
 
+        val limit = LIMIT + 1
         given(authCodeProcessor.incrementLimit(anyString()))
-            .willReturn(LIMIT + 1)
+            .willReturn(limit)
+
+        val authCodeLimit = AuthCodeLimit(
+            phoneNumber = phoneNumber,
+            limit = limit,
+        )
+
+        given(authCodeProcessor.saveAuthCodeLimit(any()))
+            .willReturn(authCodeLimit)
 
         // when & then
         assertThrows<AuthCodeOverLimitException> {

@@ -15,6 +15,7 @@ import team.nukiya.demention.domain.help.repository.HelpEntityRepository
 import team.nukiya.demention.domain.user.domain.Authority
 import team.nukiya.demention.domain.user.domain.UserEntity
 import team.nukiya.demention.domain.user.repository.UserEntityRepository
+import team.nukiya.demention.global.dto.Paging
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -65,7 +66,7 @@ class HelpReaderTest {
     }
 
     @Test
-    fun `공고 상태, 페이지, 페이지 개수를 기준으로 공고 리스트를 가져온다`() {
+    fun `공고 상태, 지역, 페이지, 페이지 개수를 기준으로 공고 리스트를 가져온다`() {
         // given
         val userEntity = createUserEntity()
         userEntityRepository.save(userEntity)
@@ -84,7 +85,7 @@ class HelpReaderTest {
             helpIds.add(savedHelpEntity.id)
         }
         // when
-        val savedAllHelps = helpReader.getAllHelps(ALL, 0, 3)
+        val savedAllHelps = helpReader.getAllHelps(ALL,"대전광역시", Paging(0,3))
 
         // then
         assertThat(savedAllHelps)

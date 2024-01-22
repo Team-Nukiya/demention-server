@@ -129,7 +129,6 @@ class HelpReaderTest {
             id = UUID.randomUUID(),
             phoneNumber = "010xxxxxxxx",
             nickName = "강민",
-            name = "강민",
             addressName = "대전광역시 유성구 장동 23-9 ",
             sido = "대전광역시",
             gungu = "유성구",

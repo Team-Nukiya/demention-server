@@ -40,8 +40,6 @@ class HelpController(
             help = request.toHelp(
                 userId = UUID.fromString(provider.username)
             ),
-            currentUser = provider.user,
-            userName = request.userName,
         )
     }
 

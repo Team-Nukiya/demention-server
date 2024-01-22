@@ -7,7 +7,6 @@ import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpStatus
 import team.nukiya.demention.domain.help.exception.HelpNotFoundException
 import team.nukiya.demention.domain.user.domain.User
-import team.nukiya.demention.domain.user.service.UserProcessor
 import team.nukiya.demention.global.dto.Paging
 import java.util.UUID
 
@@ -15,18 +14,8 @@ import java.util.UUID
 class HelpService(
     private val helpProcessor: HelpProcessor,
     private val helpReader: HelpReader,
-    private val userProcessor: UserProcessor,
 ) {
-    fun create(
-        help: Help,
-        currentUser: User,
-        userName: String,
-    ) {
-        if (currentUser.name.isNullOrBlank()) {
-            currentUser.updateName(name = userName)
-            userProcessor.saveUser(currentUser)
-        }
-
+    fun create(help: Help) {
         helpProcessor.saveHelp(help)
     }
 

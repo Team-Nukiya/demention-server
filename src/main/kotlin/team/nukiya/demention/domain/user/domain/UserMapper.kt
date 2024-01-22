@@ -10,7 +10,6 @@ class UserMapper : GenericMapper<User, UserEntity> {
             id = entity.id,
             phoneNumber = entity.phoneNumber,
             nickName = entity.nickName,
-            name = entity.name,
             address = Address(
                 addressName = entity.addressName,
                 sido = entity.sido,
@@ -27,7 +26,6 @@ class UserMapper : GenericMapper<User, UserEntity> {
             id = domain.id,
             phoneNumber = domain.phoneNumber,
             nickName = domain.nickName,
-            name = domain.name,
             addressName = domain.address.addressName,
             sido = domain.address.sido,
             gungu = domain.address.gungu,

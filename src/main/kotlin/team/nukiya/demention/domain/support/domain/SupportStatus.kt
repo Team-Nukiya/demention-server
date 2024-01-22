@@ -7,5 +7,10 @@ enum class SupportStatus(
     UNSUPPORTING("지원 취소"),
     APPROVED("승인"),
     REJECTED("거절"),
-    DONE("완료"),
+    DONE("완료");
+
+    companion object {
+        val RESUPPORT
+            get() = listOf(SUPPORTING, APPROVED, REJECTED, DONE)
+    }
 }

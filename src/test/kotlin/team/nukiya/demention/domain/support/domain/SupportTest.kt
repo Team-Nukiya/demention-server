@@ -3,8 +3,8 @@ package team.nukiya.demention.domain.support.domain
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import team.nukiya.demention.domain.support.domain.SupportStatus.SUPPORTING
-import team.nukiya.demention.domain.support.domain.SupportStatus.UNSUPPORTING
+import team.nukiya.demention.domain.support.domain.SupportStatus.SUPPORTED
+import team.nukiya.demention.domain.support.domain.SupportStatus.CANCELED
 import team.nukiya.demention.domain.support.exception.SupportCanNotCancelException
 import java.time.LocalDateTime
 import java.util.UUID
@@ -16,7 +16,7 @@ class SupportTest {
         val support = Support(
             userId = UUID.randomUUID(),
             helpId = UUID.randomUUID(),
-            supportStatus = SUPPORTING,
+            supportStatus = SUPPORTED,
             createdDateTime = LocalDateTime.now(),
         )
 
@@ -32,7 +32,7 @@ class SupportTest {
         val support = Support(
             userId = UUID.randomUUID(),
             helpId = UUID.randomUUID(),
-            supportStatus = UNSUPPORTING,
+            supportStatus = CANCELED,
             createdDateTime = LocalDateTime.now(),
         )
 

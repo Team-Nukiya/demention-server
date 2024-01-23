@@ -10,7 +10,7 @@ import team.nukiya.demention.domain.help.domain.HelpStatus
 import team.nukiya.demention.domain.help.repository.HelpEntityRepository
 import team.nukiya.demention.domain.support.domain.SupportEntity
 import team.nukiya.demention.domain.support.domain.SupportStatus
-import team.nukiya.demention.domain.support.domain.SupportStatus.SUPPORTING
+import team.nukiya.demention.domain.support.domain.SupportStatus.SUPPORTED
 import team.nukiya.demention.domain.user.domain.Authority
 import team.nukiya.demention.domain.user.domain.UserEntity
 import team.nukiya.demention.domain.user.repository.UserEntityRepository
@@ -45,12 +45,12 @@ class SupportRepositoryTest {
         userEntityRepository.save(userEntity)
         val helpEntity = createHelpEntity(userEntity)
         helpEntityRepository.save(helpEntity)
-        val supportEntity = createSupportEntity(userEntity, helpEntity, SUPPORTING)
+        val supportEntity = createSupportEntity(userEntity, helpEntity, SUPPORTED)
         supportEntityRepository.save(supportEntity)
         val userId = userEntity.id
 
         // when
-        val result = supportRepository.existsByUserIdAndInStatus(userId, listOf(SUPPORTING))
+        val result = supportRepository.existsByUserIdAndInStatus(userId, listOf(SUPPORTED))
 
         // then
         assertThat(result).isTrue()
@@ -63,7 +63,7 @@ class SupportRepositoryTest {
         userEntityRepository.save(userEntity)
         val helpEntity = createHelpEntity(userEntity)
         helpEntityRepository.save(helpEntity)
-        val supportEntity = createSupportEntity(userEntity, helpEntity, SUPPORTING)
+        val supportEntity = createSupportEntity(userEntity, helpEntity, SUPPORTED)
         supportEntityRepository.save(supportEntity)
         val userId = userEntity.id
         val helpId = helpEntity.id

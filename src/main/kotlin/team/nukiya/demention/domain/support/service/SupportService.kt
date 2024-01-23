@@ -23,7 +23,7 @@ class SupportService(
         return supportRepository.save(support).id
     }
 
-    fun unSupport(userId: UUID, helpId: UUID): UUID {
+    fun cancel(userId: UUID, helpId: UUID): UUID {
         val support = supportRepository.queryByUserIdAndHelpId(userId, helpId)
             ?.apply { checkCancellable() }
             ?: throw SupportNotFountException

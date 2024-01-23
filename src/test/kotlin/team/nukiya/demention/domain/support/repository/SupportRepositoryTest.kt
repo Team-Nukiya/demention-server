@@ -57,7 +57,7 @@ class SupportRepositoryTest {
     }
 
     @Test
-    fun `유저 식별키와 공고 식별키로 지원 객체를 가져온다`() {
+    fun `유저, 공고 식별키로 지원 객체를 가져온다`() {
         // given
         val userEntity = createUserEntity()
         userEntityRepository.save(userEntity)

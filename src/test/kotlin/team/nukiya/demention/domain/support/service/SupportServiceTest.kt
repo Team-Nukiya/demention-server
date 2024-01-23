@@ -108,7 +108,7 @@ class SupportServiceTest {
         val helpId = helpEntity.id
 
         // when
-        val savedSupportId = supportService.unSupport(userId, helpId)
+        val savedSupportId = supportService.cancel(userId, helpId)
 
         // then
         assertThat(savedSupportId).isNotNull()
@@ -129,7 +129,7 @@ class SupportServiceTest {
 
         // when & then
         assertThrows<SupportCanNotCancelException> {
-            supportService.unSupport(userId, helpId)
+            supportService.cancel(userId, helpId)
         }
     }
 
@@ -148,7 +148,7 @@ class SupportServiceTest {
 
         // when & then
         assertThrows<SupportNotFountException> {
-            supportService.unSupport(userId, helpId)
+            supportService.cancel(userId, helpId)
         }
     }
 

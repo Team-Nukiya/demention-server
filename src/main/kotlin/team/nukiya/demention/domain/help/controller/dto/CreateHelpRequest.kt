@@ -27,10 +27,6 @@ data class CreateHelpRequest(
 
     @NotNull
     val helpEndDateTime: LocalDateTime,
-
-    @NotBlank
-    @Size(max = 10)
-    val userName: String,
 ) {
     fun toHelp(userId: UUID) =
         Help(

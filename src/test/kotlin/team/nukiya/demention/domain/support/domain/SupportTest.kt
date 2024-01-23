@@ -11,7 +11,7 @@ import java.util.UUID
 
 class SupportTest {
     @Test
-    fun `지원 취소를 한다`() {
+    fun `지원 취소를 할 수 있는지 확인한다`() {
         // given
         val support = Support(
             userId = UUID.randomUUID(),

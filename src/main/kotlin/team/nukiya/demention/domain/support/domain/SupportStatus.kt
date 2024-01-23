@@ -11,6 +11,6 @@ enum class SupportStatus(
 
     companion object {
         val RESUPPORT
-            get() = listOf(SUPPORTED, APPROVED, REJECTED, DONE)
+            get() = listOf(SUPPORTED, APPROVED)
     }
 }

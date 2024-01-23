@@ -33,11 +33,11 @@ class SupportController(
     }
 
     @PatchMapping("/{help-id}")
-    fun unsupport(
+    fun cancelSupport(
         @AuthenticationPrincipal provider: AuthDetails,
         @PathVariable("help-id") helpId: UUID,
     ) {
-        supportService.unSupport(
+        supportService.cancel(
             userId = UUID.fromString(provider.username),
             helpId = helpId,
         )

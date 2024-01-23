@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController
 import team.nukiya.demention.domain.user.controller.dto.TokenResponse
 import team.nukiya.demention.domain.user.controller.dto.UserSignInRequest
 import team.nukiya.demention.domain.user.controller.dto.UserSignUpRequest
-import team.nukiya.demention.domain.user.domain.Coordinate
 import team.nukiya.demention.domain.user.service.UserSignInService
 import team.nukiya.demention.domain.user.service.UserSignUpService
+import team.nukiya.demention.global.constant.ApiUrlConstant.USER_URL
 
-@RequestMapping("/v1/users")
+@RequestMapping(USER_URL)
 @RestController
 class UserController(
     private val userSignUpService: UserSignUpService,

@@ -50,8 +50,4 @@ class HelpEntity(
     @NotNull
     @Column(columnDefinition = "DATETIME(6)")
     val helpEndDateTime: LocalDateTime,
-
-    createdDateTime: LocalDateTime,
-
-    modifiedDateTime: LocalDateTime
 ) : BaseEntity()

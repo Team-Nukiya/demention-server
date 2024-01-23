@@ -14,9 +14,10 @@ import team.nukiya.demention.domain.auth.controller.dto.SendAuthCodeResponse
 import team.nukiya.demention.domain.auth.domain.AuthCode
 import team.nukiya.demention.domain.auth.service.CertifyAuthCodeService
 import team.nukiya.demention.domain.auth.service.SendAuthCodeService
+import team.nukiya.demention.global.constant.ApiUrlConstant.AUTH_URL
 
 @Validated
-@RequestMapping("/v1/auth")
+@RequestMapping(AUTH_URL)
 @RestController
 class AuthController(
     private val sendAuthCodeService: SendAuthCodeService,

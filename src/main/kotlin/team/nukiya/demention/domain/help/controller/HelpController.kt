@@ -20,13 +20,14 @@ import team.nukiya.demention.domain.help.domain.AllHelp.Companion.DEFAULT_LIMIT
 import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpStatus
 import team.nukiya.demention.domain.help.service.HelpService
+import team.nukiya.demention.global.constant.ApiUrlConstant.HELP_URL
 import team.nukiya.demention.global.dto.Paging
 import team.nukiya.demention.global.dto.Paging.Companion.DEFAULT_PAGE
 import team.nukiya.demention.global.security.auth.AuthDetails
 import java.util.UUID
 
 @Validated
-@RequestMapping("/v1/helps")
+@RequestMapping(HELP_URL)
 @RestController
 class HelpController(
     private val helpService: HelpService,

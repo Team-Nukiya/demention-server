@@ -23,9 +23,6 @@ class UserEntity(
     @Column(columnDefinition = "VARCHAR(10)")
     val nickName: String,
 
-    @Column(columnDefinition = "VARCHAR(10)")
-    val name: String?,
-
     @NotNull
     @Column(columnDefinition = "VARCHAR(500)")
     val addressName: String,

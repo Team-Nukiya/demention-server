@@ -14,6 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import team.nukiya.demention.global.constant.DementionUrlConstant.AUTH_URL
+import team.nukiya.demention.global.constant.DementionUrlConstant.HELP_URL
+import team.nukiya.demention.global.constant.DementionUrlConstant.SUPPORT_URL
+import team.nukiya.demention.global.constant.DementionUrlConstant.USER_URL
 import team.nukiya.demention.global.filter.GlobalExceptionFilter
 import team.nukiya.demention.global.filter.JwtFilter
 import team.nukiya.demention.infrastructure.jwt.JwtParser
@@ -34,17 +38,20 @@ class SecurityConfig(
                 // health check
                 it.requestMatchers(GET, "/health-check").permitAll()
                 // auth
-                it.requestMatchers(POST, "$VERSION$AUTH_URL/codes").permitAll()
-                it.requestMatchers(GET, "$VERSION$AUTH_URL/certified").permitAll()
+                it.requestMatchers(POST, "$AUTH_URL/codes").permitAll()
+                it.requestMatchers(GET, "$AUTH_URL/certified").permitAll()
                 // user
-                it.requestMatchers(POST, "$VERSION$USER_URL/sign-up").permitAll()
-                it.requestMatchers(POST, "$VERSION$USER_URL/sign-in").permitAll()
+                it.requestMatchers(POST, "$USER_URL/sign-up").permitAll()
+                it.requestMatchers(POST, "$USER_URL/sign-in").permitAll()
                 // help
-                it.requestMatchers(POST, "$VERSION$HELP_URL").authenticated()
-                it.requestMatchers(PATCH, "$VERSION$HELP_URL$HELP_ID").authenticated()
-                it.requestMatchers(DELETE, "$VERSION$HELP_URL$HELP_ID").authenticated()
-                it.requestMatchers(GET, "$VERSION$HELP_URL$HELP_ID").authenticated()
-                it.requestMatchers(GET, "$VERSION$HELP_URL").authenticated()
+                it.requestMatchers(POST, "$HELP_URL").authenticated()
+                it.requestMatchers(PATCH, "$HELP_URL/{help-id}").authenticated()
+                it.requestMatchers(DELETE, "$HELP_URL/{help-id}").authenticated()
+                it.requestMatchers(GET, "$HELP_URL/{help-id}").authenticated()
+                it.requestMatchers(GET, HELP_URL).authenticated()
+                // support
+                it.requestMatchers(POST, SUPPORT_URL).authenticated()
+                it.requestMatchers(PATCH, "$SUPPORT_URL/{help-id}").authenticated()
                 it.anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
@@ -54,12 +61,4 @@ class SecurityConfig(
 
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
-
-    companion object {
-        private const val VERSION = "/v1"
-        private const val AUTH_URL = "/auth"
-        private const val USER_URL = "/users"
-        private const val HELP_URL = "/helps"
-        private const val HELP_ID = "/{help-id}"
-    }
 }

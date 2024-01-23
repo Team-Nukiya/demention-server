@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import team.nukiya.demention.domain.support.controller.dto.SupportRequest
 import team.nukiya.demention.domain.support.service.SupportService
-import team.nukiya.demention.global.constant.DementionUrlConstant.SUPPORT_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.SUPPORT_URL
 import team.nukiya.demention.global.security.auth.AuthDetails
 import java.util.UUID
 

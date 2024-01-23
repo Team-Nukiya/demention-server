@@ -14,10 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import team.nukiya.demention.global.constant.DementionUrlConstant.AUTH_URL
-import team.nukiya.demention.global.constant.DementionUrlConstant.HELP_URL
-import team.nukiya.demention.global.constant.DementionUrlConstant.SUPPORT_URL
-import team.nukiya.demention.global.constant.DementionUrlConstant.USER_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.AUTH_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.HELP_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.SUPPORT_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.USER_URL
 import team.nukiya.demention.global.filter.GlobalExceptionFilter
 import team.nukiya.demention.global.filter.JwtFilter
 import team.nukiya.demention.infrastructure.jwt.JwtParser

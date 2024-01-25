@@ -37,6 +37,8 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 // health check
                 it.requestMatchers(GET, "/health-check").permitAll()
+                // rest docs
+                it.requestMatchers(GET, "/docs/index.html").permitAll()
                 // auth
                 it.requestMatchers(POST, "$AUTH_URL/codes").permitAll()
                 it.requestMatchers(GET, "$AUTH_URL/certified").permitAll()
@@ -44,7 +46,7 @@ class SecurityConfig(
                 it.requestMatchers(POST, "$USER_URL/sign-up").permitAll()
                 it.requestMatchers(POST, "$USER_URL/sign-in").permitAll()
                 // help
-                it.requestMatchers(POST, "$HELP_URL").authenticated()
+                it.requestMatchers(POST, HELP_URL).authenticated()
                 it.requestMatchers(PATCH, "$HELP_URL/{help-id}").authenticated()
                 it.requestMatchers(DELETE, "$HELP_URL/{help-id}").authenticated()
                 it.requestMatchers(GET, "$HELP_URL/{help-id}").authenticated()

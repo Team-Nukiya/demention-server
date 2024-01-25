@@ -2,7 +2,7 @@ package team.nukiya.demention.global.constant
 
 object ApiUrlConstant {
     // Version
-    const val VERSION = "api/v1"
+    private const val VERSION = "/api/v1"
 
     // Url
     const val AUTH_URL = "$VERSION/auth"

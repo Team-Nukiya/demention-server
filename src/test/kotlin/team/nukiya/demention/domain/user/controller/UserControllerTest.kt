@@ -24,7 +24,7 @@ class UserControllerTest : RestDocsTestSupport() {
     private lateinit var userEntityRepository: UserEntityRepository
 
     @Test
-    fun `유저가 회원가입을 진행한다`() {
+    fun `유저가 회원가입을 한다`() {
         // given
         val userSignUpRequest = UserSignUpRequest(
             phoneNumber = "010xxxxxxxx",
@@ -60,7 +60,7 @@ class UserControllerTest : RestDocsTestSupport() {
     }
 
     @Test
-    fun `유저가 로그인을 진행한다`() {
+    fun `유저가 로그인을 한다`() {
         // given
         val phoneNumber = "010xxxxxxxx"
         val userEntity = UserEntity(

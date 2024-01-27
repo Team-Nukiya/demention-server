@@ -1,0 +1,7 @@
+== Auth API DOCS
+
+=== 인증 코드 보내기
+operation::auth-controller-test/인증 코드를 보낸다[snippets="http-request,http-response,request-body,request-fields,response-body,response-fields"]
+
+=== 인증 코드 확인
+operation::auth-controller-test/올바른 인증코드인지 확인한다[snippets="http-request,http-response,query-parameters"]

@@ -16,7 +16,6 @@ class UserSignInService(
 
         return jwtProvider.generateAllToken(
             id = savedUser.id.toString(),
-            authority = savedUser.authority,
         )
     }
 }

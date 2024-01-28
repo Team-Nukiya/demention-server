@@ -1,5 +1,6 @@
 package team.nukiya.demention.domain.auth.controller
 
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -27,6 +28,12 @@ class AuthControllerTest : RestDocsTestSupport() {
 
     @Autowired
     private lateinit var authCodeLimitEntityRepository: AuthCodeLimitEntityRepository
+
+    @AfterEach
+    fun tearDown() {
+        authCodeLimitEntityRepository.deleteAll()
+        authCodeEntityRepository.deleteAll()
+    }
 
     @Test
     fun `인증 코드를 보낸다`() {

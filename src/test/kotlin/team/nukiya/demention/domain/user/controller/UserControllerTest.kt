@@ -1,5 +1,6 @@
 package team.nukiya.demention.domain.user.controller
 
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -22,6 +23,11 @@ import java.util.UUID
 class UserControllerTest : RestDocsTestSupport() {
     @Autowired
     private lateinit var userEntityRepository: UserEntityRepository
+
+    @AfterEach
+    fun tearDown() {
+        userEntityRepository.deleteAll()
+    }
 
     @Test
     fun `유저가 회원가입을 한다`() {

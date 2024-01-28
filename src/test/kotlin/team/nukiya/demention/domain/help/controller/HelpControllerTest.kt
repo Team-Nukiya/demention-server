@@ -267,7 +267,7 @@ class HelpControllerTest : RestDocsTestSupport() {
                         parameterWithName("help-id").description("공고 식별키")
                     ),
                     responseFields(
-                        fieldWithPath("helpId").type(STRING).description("공고 식별키"),
+                        fieldWithPath("helpId").type(VARIES).description("공고 식별키"),
                         fieldWithPath("title").type(STRING).description("제목"),
                         fieldWithPath("content").type(STRING).description("내용"),
                         fieldWithPath("compensation").type(STRING).description("보상 내용"),

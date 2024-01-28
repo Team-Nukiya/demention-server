@@ -8,6 +8,7 @@ import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
 import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
+import org.springframework.restdocs.payload.JsonFieldType.VARIES
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
 import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
@@ -91,7 +92,7 @@ class SupportControllerTest : RestDocsTestSupport() {
                         headerWithName("Authorization").description("JWT 액세스 토큰"),
                     ),
                     requestFields(
-                        fieldWithPath("helpId").description("지원할 공고 식별키"),
+                        fieldWithPath("helpId").type(VARIES).description("지원할 공고 식별키"),
                     ),
                 ),
             )

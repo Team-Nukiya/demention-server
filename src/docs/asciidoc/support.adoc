@@ -1,0 +1,7 @@
+== Support API DOCS
+
+=== 공고 지원하기
+operation::support-controller-test/공고에 지원한다[snippets="http-request,http-response,request-body,request-fields,request-headers"]
+
+=== 공고 지원 취소하기
+operation::support-controller-test/공고 지원을 취소한다[snippets="http-request,http-response,path-parameters,request-headers"]

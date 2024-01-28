@@ -1,0 +1,16 @@
+== Help API DOCS
+
+=== 공고 생성
+operation::help-controller-test/공고를 작성한다[snippets="http-request,http-response,request-body,request-fields,request-headers"]
+
+=== 공고 수정
+operation::help-controller-test/공고를 수정한다[snippets="http-request,http-response,path-parameters,request-body,request-fields,request-headers"]
+
+=== 공고 삭제
+operation::help-controller-test/공고를 삭제한다[snippets="http-request,http-response,path-parameters,request-headers"]
+
+=== 공고 상세 조회
+operation::help-controller-test/공고를 상세 조회한다[snippets="http-request,http-response,path-parameters,request-headers,response-body,response-fields"]
+
+=== 공고 목록 조회
+operation::help-controller-test/공고 목록을 조회한다[snippets="http-request,http-response,query-parameters,request-headers,response-body,response-fields"]

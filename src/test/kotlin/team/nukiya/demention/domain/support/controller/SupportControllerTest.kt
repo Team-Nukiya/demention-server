@@ -8,7 +8,6 @@ import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
 import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
-import org.springframework.restdocs.payload.JsonFieldType.VARIES
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.requestFields
 import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
@@ -59,16 +58,7 @@ class SupportControllerTest : RestDocsTestSupport() {
     fun `공고에 지원한다`() {
         // given
         val savedUserEntity = userEntityRepository.save(
-            UserEntity(
-                id = UUID.randomUUID(),
-                phoneNumber = "010xxxxxxxx",
-                nickName = "강민",
-                addressName = "대전광역시 유성구 장동 23-9 ",
-                sido = "대전광역시",
-                gungu = "유성구",
-                eupMyeonDong = "장동",
-                authority = USER,
-            )
+            createUserEntity()
         )
 
         val userId = savedUserEntity.id.toString()
@@ -111,16 +101,7 @@ class SupportControllerTest : RestDocsTestSupport() {
     fun `공고 지원을 취소한다`() {
         // given
         val savedUserEntity = userEntityRepository.save(
-            UserEntity(
-                id = UUID.randomUUID(),
-                phoneNumber = "010xxxxxxxx",
-                nickName = "강민",
-                addressName = "대전광역시 유성구 장동 23-9 ",
-                sido = "대전광역시",
-                gungu = "유성구",
-                eupMyeonDong = "장동",
-                authority = USER,
-            )
+            createUserEntity()
         )
 
         val userId = savedUserEntity.id.toString()
@@ -162,6 +143,18 @@ class SupportControllerTest : RestDocsTestSupport() {
                 ),
             )
     }
+
+    private fun createUserEntity() =
+        UserEntity(
+            id = UUID.randomUUID(),
+            phoneNumber = "010xxxxxxxx",
+            nickName = "강민",
+            addressName = "대전광역시 유성구 장동 23-9 ",
+            sido = "대전광역시",
+            gungu = "유성구",
+            eupMyeonDong = "장동",
+            authority = USER,
+        )
 
     private fun createHelpEntity(savedUserEntity: UserEntity) =
         HelpEntity(

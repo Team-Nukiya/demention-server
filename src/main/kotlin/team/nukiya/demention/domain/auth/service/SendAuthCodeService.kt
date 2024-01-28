@@ -22,10 +22,9 @@ class SendAuthCodeService(
         val authCodeLimit = AuthCodeLimit(
             phoneNumber = phoneNumber,
             limit = incrementLimit,
-        )
+        ).apply { checkOverLimit() }
 
         val savedAuthCodeLimit = authCodeProcessor.saveAuthCodeLimit(authCodeLimit)
-            .apply { checkOverLimit() }
 
         return savedAuthCodeLimit.limit
     }

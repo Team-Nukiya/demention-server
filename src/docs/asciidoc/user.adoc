@@ -1,0 +1,7 @@
+== User API DOCS
+
+=== 회원가입
+operation::user-controller-test/유저가 회원가입을 한다[]
+
+=== 로그인
+operation::user-controller-test/유저가 로그인을 한다[]

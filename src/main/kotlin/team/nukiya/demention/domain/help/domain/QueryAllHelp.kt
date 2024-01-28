@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 class QueryAllHelp @QueryProjection constructor(
-    id: UUID,
+    helpId: UUID,
     title: String,
     compensation: String,
     helpImageUrl: String,
@@ -14,7 +14,7 @@ class QueryAllHelp @QueryProjection constructor(
     userAddressName: String,
     userNickName: String,
 ) : AllHelp(
-    id = id,
+    helpId = helpId,
     title = title,
     compensation = compensation,
     helpImageUrl = helpImageUrl,

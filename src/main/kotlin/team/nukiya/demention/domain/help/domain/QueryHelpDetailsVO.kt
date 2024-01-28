@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 class QueryHelpDetailsVO @QueryProjection constructor(
-    id: UUID,
+    helpId: UUID,
     title: String,
     content: String,
     compensation: String,
@@ -17,7 +17,7 @@ class QueryHelpDetailsVO @QueryProjection constructor(
     userAddressName: String,
     userNickName: String,
 ) : HelpDetails(
-    id = id,
+    helpId = helpId,
     title = title,
     content = content,
     compensation = compensation,

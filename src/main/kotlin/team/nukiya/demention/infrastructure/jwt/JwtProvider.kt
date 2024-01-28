@@ -19,9 +19,9 @@ class JwtProvider(
     private val jwtProperties: JwtProperties,
     private val refreshTokenEntityRepository: RefreshTokenEntityRepository,
 ) {
-    fun generateAllToken(id: String, authority: Authority): TokenResponse {
-        val accessToken = generateAccessToken(id, authority)
-        val refreshToken = generateRefreshToken(id, authority)
+    fun generateAllToken(id: String): TokenResponse {
+        val accessToken = generateAccessToken(id)
+        val refreshToken = generateRefreshToken(id)
 
         refreshTokenEntityRepository.save(
             RefreshTokenEntity(
@@ -38,25 +38,22 @@ class JwtProvider(
         )
     }
 
-    fun generateAccessToken(id: String, authority: Authority) = generateToken(
-        id,
-        authority,
-        ACCESS,
-        jwtProperties.accessExp
+    fun generateAccessToken(id: String) = generateToken(
+        id = id,
+        type = ACCESS,
+        exp = jwtProperties.accessExp
     )
 
-    fun generateRefreshToken(id: String, authority: Authority) = generateToken(
-        id,
-        authority,
-        REFRESH,
-        jwtProperties.refreshExp
+    fun generateRefreshToken(id: String) = generateToken(
+        id = id,
+        type = REFRESH,
+        exp = jwtProperties.refreshExp
     )
 
-    private fun generateToken(id: String, authority: Authority, type: String, exp: Long) =
+    private fun generateToken(id: String, type: String, exp: Long) =
         Jwts.builder()
             .setHeaderParam(Header.JWT_TYPE, type)
             .setSubject(id)
-            .claim(AUTHORITY, authority.name)
             .signWith(jwtProperties.secretKey, SignatureAlgorithm.HS256)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + exp * 1000))

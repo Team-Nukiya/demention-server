@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 open class AllHelp(
-    val id: UUID,
+    val helpId: UUID,
     val title: String,
     val compensation: String,
     val helpImageUrl: String,

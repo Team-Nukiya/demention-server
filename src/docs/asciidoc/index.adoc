@@ -1,0 +1,11 @@
+= Demention API DOCS
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:seclinks:
+
+include::auth.adoc[]
+include::user.adoc[]
+include::help.adoc[]
+include::support.adoc[]

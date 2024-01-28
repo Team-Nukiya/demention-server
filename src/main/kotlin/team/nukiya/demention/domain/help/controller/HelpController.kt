@@ -2,6 +2,9 @@ package team.nukiya.demention.domain.help.controller
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.CREATED
+import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import team.nukiya.demention.domain.help.controller.dto.CreateHelpRequest
 import team.nukiya.demention.domain.help.controller.dto.GetAllHelpsResponse
@@ -32,6 +36,7 @@ import java.util.UUID
 class HelpController(
     private val helpService: HelpService,
 ) {
+    @ResponseStatus(CREATED)
     @PostMapping
     fun createHelp(
         @RequestBody @Valid request: CreateHelpRequest,
@@ -44,6 +49,7 @@ class HelpController(
         )
     }
 
+    @ResponseStatus(NO_CONTENT)
     @PatchMapping("/{$HELP_ID}")
     fun modifyHelp(
         @RequestBody @Valid request: UpdateHelpRequest,
@@ -60,6 +66,7 @@ class HelpController(
         )
     }
 
+    @ResponseStatus(NO_CONTENT)
     @DeleteMapping("/{$HELP_ID}")
     fun removeHelp(
         @PathVariable(HELP_ID) helpId: UUID,

@@ -91,7 +91,7 @@ class HelpReaderTest {
         assertThat(savedAllHelps)
             .hasSize(3)
             .extracting(
-                "id",
+                "helpId",
                 "title",
                 "compensation",
                 "helpStartDateTime",
@@ -113,7 +113,7 @@ class HelpReaderTest {
         helpEndDateTime: LocalDateTime,
     ) =
         AllHelp(
-            id = helpId,
+            helpId = helpId,
             title = "약이 필요합니다.",
             compensation = "1만 원",
             helpImageUrl = "이미지 링크",
@@ -159,7 +159,7 @@ class HelpReaderTest {
         helpEndDateTime: LocalDateTime,
         modifiedDateTime: LocalDateTime,
     ) = HelpDetails(
-        id = helpId,
+        helpId = helpId,
         title = "약이 필요합니다.",
         content = "이러이러해서 약이 필요합니다.",
         compensation = "1만 원",

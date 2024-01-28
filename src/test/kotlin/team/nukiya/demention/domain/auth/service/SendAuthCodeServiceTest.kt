@@ -62,7 +62,7 @@ class SendAuthCodeServiceTest {
 
         val limit = LIMIT + 1
         given(authCodeProcessor.incrementLimit(anyString()))
-            .willReturn(limi트t)
+            .willReturn(limit)
 
         // when & then
         assertThrows<AuthCodeOverLimitException> {

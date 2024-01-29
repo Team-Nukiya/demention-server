@@ -3,6 +3,7 @@ package team.nukiya.demention.domain.auth.controller
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.http.MediaType
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
@@ -29,17 +30,23 @@ class AuthControllerTest : RestDocsTestSupport() {
     @Autowired
     private lateinit var authCodeLimitEntityRepository: AuthCodeLimitEntityRepository
 
+    @Autowired
+    private lateinit var restTemplate: RedisTemplate<String, String>
+
+    val phoneNumber = "010xxxxxxxx"
+
     @AfterEach
     fun tearDown() {
         authCodeLimitEntityRepository.deleteAll()
         authCodeEntityRepository.deleteAll()
+        restTemplate.delete(phoneNumber)
     }
 
     @Test
     fun `인증 코드를 보낸다`() {
         // given
         val sendAuthCodeRequest = SendAuthCodeRequest(
-            to = "010xxxxxxxx"
+            to = phoneNumber
         )
 
         // when
@@ -69,7 +76,6 @@ class AuthControllerTest : RestDocsTestSupport() {
     fun `올바른 인증코드인지 확인한다`() {
         // given
         val code = "111111"
-        val phoneNumber = "010xxxxxxxx"
         authCodeLimitEntityRepository.save(
             AuthCodeLimitEntity(
                 phoneNumber = phoneNumber,

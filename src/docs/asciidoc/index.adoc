@@ -5,7 +5,7 @@
 :toclevels: 2
 :seclinks:
 
-include::auth.adoc[]
-include::user.adoc[]
-include::help.adoc[]
-include::support.adoc[]
+include::../demention-server/src/docs/asciidoc/auth.adoc[]
+include::../demention-server/src/docs/asciidoc/user.adoc[]
+include::../demention-server/src/docs/asciidoc/help.adoc[]
+include::../demention-server/src/docs/asciidoc/support.adoc[]

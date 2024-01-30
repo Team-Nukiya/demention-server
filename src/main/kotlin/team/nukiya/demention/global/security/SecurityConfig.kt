@@ -46,6 +46,7 @@ class SecurityConfig(
                 // user
                 it.requestMatchers(POST, "$USER_URL/sign-up").permitAll()
                 it.requestMatchers(POST, "$USER_URL/sign-in").permitAll()
+                it.requestMatchers(GET, "$USER_URL/my").authenticated()
                 // help
                 it.requestMatchers(POST, HELP_URL).authenticated()
                 it.requestMatchers(PATCH, "$HELP_URL/{help-id}").authenticated()

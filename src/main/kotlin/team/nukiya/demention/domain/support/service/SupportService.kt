@@ -2,6 +2,8 @@ package team.nukiya.demention.domain.support.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import team.nukiya.demention.domain.help.exception.HelpNotFoundException
+import team.nukiya.demention.domain.help.service.HelpReader
 import team.nukiya.demention.domain.support.domain.Support
 import team.nukiya.demention.domain.support.domain.SupportStatus.Companion.RESUPPORT
 import team.nukiya.demention.domain.support.domain.SupportStatus.CANCELED
@@ -14,11 +16,16 @@ import java.util.UUID
 @Service
 class SupportService(
     private val supportRepository: SupportRepository,
+    private val helpReader: HelpReader,
 ) {
     fun support(support: Support): UUID {
         if (supportRepository.existsByUserIdAndInStatus(support.userId, RESUPPORT)) {
             throw AlreadySupportException
         }
+
+        helpReader.getHelpById(support.helpId)
+            ?. apply { checkMine(support.userId) }
+            ?: throw HelpNotFoundException
 
         return supportRepository.save(support).id
     }

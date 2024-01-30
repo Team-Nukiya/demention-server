@@ -6,6 +6,7 @@ import team.nukiya.demention.domain.point.domain.Point
 import team.nukiya.demention.domain.point.repository.PointRepository
 import team.nukiya.demention.domain.support.exception.SupportNotFountException
 import team.nukiya.demention.domain.support.repository.SupportRepository
+import java.util.UUID
 
 @Transactional(readOnly = true)
 @Service
@@ -14,11 +15,11 @@ class PointService(
     private val pointRepository: PointRepository,
 ) {
     @Transactional
-    fun give(point: Point) {
+    fun give(point: Point): UUID {
         supportRepository.queryById(point.receiveSupportId)
             ?.apply { checkIsDone() }
             ?: throw SupportNotFountException
 
-        pointRepository.save(point)
+        return pointRepository.save(point).id
     }
 }

@@ -3,16 +3,23 @@ package team.nukiya.demention.domain.support.controller
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import team.nukiya.demention.domain.help.controller.dto.GetAllHelpsResponse
+import team.nukiya.demention.domain.help.domain.AllHelp
+import team.nukiya.demention.domain.help.domain.AllHelp.Companion.DEFAULT_LIMIT
 import team.nukiya.demention.domain.support.controller.dto.SupportRequest
 import team.nukiya.demention.domain.support.service.SupportService
 import team.nukiya.demention.global.constant.ApiUrlConstant.SUPPORT_URL
+import team.nukiya.demention.global.dto.Paging
+import team.nukiya.demention.global.dto.Paging.Companion.DEFAULT_PAGE
 import team.nukiya.demention.global.security.auth.AuthDetails
 import java.util.UUID
 
@@ -45,5 +52,15 @@ class SupportController(
             userId = UUID.fromString(provider.username),
             helpId = helpId,
         )
+    }
+
+    @GetMapping("/histories")
+    fun getHistories(
+        @AuthenticationPrincipal provider: AuthDetails,
+        @RequestParam(defaultValue = DEFAULT_PAGE.toString()) page: Long,
+        @RequestParam(defaultValue = DEFAULT_LIMIT.toString()) limit: Long,
+    ): GetAllHelpsResponse {
+        val histories = supportService.getHistories(provider.user, Paging(page = page, limit = limit))
+        return GetAllHelpsResponse(histories)
     }
 }

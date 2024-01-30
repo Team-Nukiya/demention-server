@@ -19,11 +19,11 @@ class SupportEntity(
     id: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     val userEntity: UserEntity?,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "help_id", nullable = false)
     val helpEntity: HelpEntity?,
 
     @NotNull

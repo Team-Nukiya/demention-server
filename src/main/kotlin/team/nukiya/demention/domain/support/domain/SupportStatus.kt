@@ -7,7 +7,7 @@ enum class SupportStatus(
     CANCELED("지원 취소"),
     APPROVED("승인"),
     REJECTED("거절"),
-    DONE("완료");
+    DONE("봉사 완료");
 
     companion object {
         val RESUPPORT

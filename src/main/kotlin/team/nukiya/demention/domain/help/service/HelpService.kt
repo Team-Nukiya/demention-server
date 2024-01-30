@@ -52,4 +52,7 @@ class HelpService(
             sido = currentUser.address.sido,
             paging = paging,
         )
+
+    fun getHistories(user: User, paging: Paging): List<AllHelp> =
+        helpReader.getHistories(user, paging)
 }

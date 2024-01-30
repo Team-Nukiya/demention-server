@@ -2,7 +2,6 @@ package team.nukiya.demention.domain.help.controller
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -94,7 +93,17 @@ class HelpController(
             currentUser = provider.user,
             paging = Paging(page = page, limit = limit)
         )
-        return GetAllHelpsResponse(helps = helps)
+        return GetAllHelpsResponse(helps)
+    }
+
+    @GetMapping("/histories")
+    fun getHistories(
+        @AuthenticationPrincipal provider: AuthDetails,
+        @RequestParam(defaultValue = DEFAULT_PAGE.toString()) page: Long,
+        @RequestParam(defaultValue = DEFAULT_LIMIT.toString()) limit: Long,
+    ): GetAllHelpsResponse {
+        val histories = helpService.getHistories(provider.user, Paging(page = page, limit = limit))
+        return GetAllHelpsResponse(histories)
     }
 
     companion object {

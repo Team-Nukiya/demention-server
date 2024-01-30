@@ -53,9 +53,11 @@ class SecurityConfig(
                 it.requestMatchers(DELETE, "$HELP_URL/{help-id}").authenticated()
                 it.requestMatchers(GET, "$HELP_URL/{help-id}").authenticated()
                 it.requestMatchers(GET, HELP_URL).authenticated()
+                it.requestMatchers(GET, "$HELP_URL/histories").authenticated()
                 // support
                 it.requestMatchers(POST, SUPPORT_URL).authenticated()
                 it.requestMatchers(PATCH, "$SUPPORT_URL/{help-id}").authenticated()
+                it.requestMatchers(GET, "$SUPPORT_URL/histories").authenticated()
                 // point
                 it.requestMatchers(POST, POINT_URL).authenticated()
                 it.anyRequest().denyAll()

@@ -1,5 +1,6 @@
 package team.nukiya.demention.domain.user.service
 
+import com.querydsl.jpa.impl.JPAQueryFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -32,6 +33,9 @@ class UserReaderTest {
 
     @Mock
     private lateinit var getAddressService: GetAddressService
+
+    @Mock
+    private lateinit var jpaQueryFactory: JPAQueryFactory
 
     @Test
     fun `전화번호로 유저 객체를 가져온다`() {

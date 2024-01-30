@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import team.nukiya.demention.global.constant.ApiUrlConstant.AUTH_URL
 import team.nukiya.demention.global.constant.ApiUrlConstant.HELP_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.POINT_URL
 import team.nukiya.demention.global.constant.ApiUrlConstant.SUPPORT_URL
 import team.nukiya.demention.global.constant.ApiUrlConstant.USER_URL
 import team.nukiya.demention.global.filter.GlobalExceptionFilter
@@ -54,6 +55,8 @@ class SecurityConfig(
                 // support
                 it.requestMatchers(POST, SUPPORT_URL).authenticated()
                 it.requestMatchers(PATCH, "$SUPPORT_URL/{help-id}").authenticated()
+                // point
+                it.requestMatchers(POST, POINT_URL).authenticated()
                 it.anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)

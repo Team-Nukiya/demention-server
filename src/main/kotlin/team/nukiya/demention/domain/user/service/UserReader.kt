@@ -39,7 +39,7 @@ class UserReader(
     fun getAddressByCoordinate(coordinate: Coordinate) =
         getAddressService.getAddressByCoordinate(coordinate)
 
-    fun getInformation(user: User): UserInformation =
+    fun getInformation(user: User): UserInformation? =
         jpaQueryFactory
             .selectFrom(userEntity)
             .join(helpEntity)

@@ -1,7 +1,5 @@
 package team.nukiya.demention.domain.user.service
 
-import com.querydsl.core.group.GroupBy.groupBy
-import com.querydsl.core.group.GroupBy.list
 import com.querydsl.core.types.ExpressionUtils
 import com.querydsl.core.types.dsl.Expressions
 import com.querydsl.jpa.JPAExpressions
@@ -9,7 +7,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import team.nukiya.demention.domain.help.domain.QHelpEntity.helpEntity
-import team.nukiya.demention.domain.help.domain.QQueryAllHelp
 import team.nukiya.demention.domain.support.domain.QSupportEntity.supportEntity
 import team.nukiya.demention.domain.user.domain.Coordinate
 import team.nukiya.demention.domain.user.domain.QQueryUserInformation
@@ -41,56 +38,26 @@ class UserReader(
 
     fun getInformation(user: User): UserInformation? =
         jpaQueryFactory
-            .selectFrom(userEntity)
-            .join(helpEntity)
-            .on(helpEntity.userEntity.id.eq(user.id))
-            .join(supportEntity)
-            .on(supportEntity.userEntity.id.eq(user.id))
+            .select(
+                QQueryUserInformation(
+                    Expressions.constantAs(user.id, userEntity.id),
+                    Expressions.asString(user.nickName).`as`(userEntity.nickName),
+                    Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
+                    ExpressionUtils.`as`(
+                        JPAExpressions.select(helpEntity.count())
+                            .from(helpEntity)
+                            .where(helpEntity.userEntity.id.eq(user.id)),
+                        "helpCount"
+                    ),
+                    ExpressionUtils.`as`(
+                        JPAExpressions.select(supportEntity.count())
+                            .from(supportEntity)
+                            .where(supportEntity.userEntity.id.eq(user.id)),
+                        "supportCount"
+                    ),
+                )
+            )
+            .from(userEntity)
             .where(userEntity.id.eq(user.id))
-            .transform(
-                groupBy(userEntity.id)
-                    .list(
-                        QQueryUserInformation(
-                            Expressions.constantAs(user.id, userEntity.id),
-                            Expressions.asString(user.nickName).`as`(userEntity.nickName),
-                            Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
-                            list(
-                                QQueryAllHelp(
-                                    helpEntity.id,
-                                    helpEntity.title,
-                                    helpEntity.compensation,
-                                    helpEntity.helpImageUrl,
-                                    helpEntity.helpStartDateTime,
-                                    helpEntity.helpEndDateTime,
-                                    Expressions.asString(user.nickName).`as`(userEntity.nickName),
-                                    Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
-                                )
-                            ),
-                            ExpressionUtils.`as`(
-                                JPAExpressions.select(helpEntity.count())
-                                    .from(helpEntity)
-                                    .where(helpEntity.userEntity.id.eq(user.id)),
-                                "helpCount"
-                            ),
-                            list(
-                                QQueryAllHelp(
-                                    supportEntity.helpEntity.id,
-                                    supportEntity.helpEntity.title,
-                                    supportEntity.helpEntity.compensation,
-                                    supportEntity.helpEntity.helpImageUrl,
-                                    supportEntity.helpEntity.helpStartDateTime,
-                                    supportEntity.helpEntity.helpEndDateTime,
-                                    supportEntity.helpEntity.userEntity.addressName,
-                                    supportEntity.helpEntity.userEntity.nickName,
-                                )
-                            ),
-                            ExpressionUtils.`as`(
-                                JPAExpressions.select(supportEntity.count())
-                                    .from(supportEntity)
-                                    .where(supportEntity.userEntity.id.eq(user.id)),
-                                "supportCount"
-                            ),
-                        )
-                    )
-            )[0]
+            .fetchOne()
 }

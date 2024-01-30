@@ -1,6 +1,7 @@
 package team.nukiya.demention.domain.support.repository
 
 import com.querydsl.jpa.impl.JPAQueryFactory
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import team.nukiya.demention.domain.support.domain.QSupportEntity.supportEntity
 import team.nukiya.demention.domain.support.domain.Support
@@ -37,5 +38,9 @@ class SupportRepository(
                 supportEntity.helpEntity.id.eq(helpId),
             )
             .fetchOne()
+            ?.let { supportMapper.toDomain(it) }
+
+    fun queryById(supportId: UUID): Support? =
+        supportEntityRepository.findByIdOrNull(supportId)
             ?.let { supportMapper.toDomain(it) }
 }

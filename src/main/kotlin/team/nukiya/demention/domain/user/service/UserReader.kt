@@ -62,8 +62,8 @@ class UserReader(
                                     helpEntity.helpImageUrl,
                                     helpEntity.helpStartDateTime,
                                     helpEntity.helpEndDateTime,
-                                    helpEntity.userEntity.addressName,
-                                    helpEntity.userEntity.nickName,
+                                    Expressions.asString(user.nickName).`as`(userEntity.nickName),
+                                    Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
                                 )
                             ),
                             ExpressionUtils.`as`(

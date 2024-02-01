@@ -2,7 +2,7 @@ package team.nukiya.demention.domain.help.domain
 
 import team.nukiya.demention.domain.help.domain.HelpStatus.HELPING
 import team.nukiya.demention.domain.help.exception.FailedIdentityVerification
-import team.nukiya.demention.domain.support.exception.MySupportCanNotApplyException
+import team.nukiya.demention.domain.help.exception.MyHelpCanNotSupportException
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -25,9 +25,9 @@ data class Help(
         }
     }
 
-    fun checkMine(userId: UUID) {
+    fun checkIsMine(userId: UUID) {
         if (this.userId == userId) {
-            throw MySupportCanNotApplyException
+            throw MyHelpCanNotSupportException
         }
     }
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import team.nukiya.demention.domain.help.domain.HelpStatus.HELPING
 import team.nukiya.demention.domain.help.exception.FailedIdentityVerification
-import team.nukiya.demention.domain.support.exception.MySupportCanNotApplyException
+import team.nukiya.demention.domain.help.exception.MyHelpCanNotSupportException
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -77,8 +77,8 @@ class HelpTest {
         )
 
         // when & teen
-        assertThrows<MySupportCanNotApplyException> {
-            help.checkMine(userId)
+        assertThrows<MyHelpCanNotSupportException> {
+            help.checkIsMine(userId)
         }
     }
 }

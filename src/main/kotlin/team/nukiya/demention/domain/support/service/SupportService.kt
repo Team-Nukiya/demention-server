@@ -27,7 +27,7 @@ class SupportService(
         }
 
         helpReader.getHelpById(support.helpId)
-            ?. apply { checkMine(support.userId) }
+            ?. apply { checkIsMine(support.userId) }
             ?: throw HelpNotFoundException
 
         return supportRepository.save(support).id

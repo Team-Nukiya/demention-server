@@ -2,11 +2,14 @@ package team.nukiya.demention.domain.user.service
 
 import com.querydsl.core.types.ExpressionUtils
 import com.querydsl.core.types.dsl.Expressions
+import com.querydsl.core.types.dsl.MathExpressions
 import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import team.nukiya.demention.domain.help.domain.QHelpEntity.helpEntity
+import team.nukiya.demention.domain.point.domain.QPointEntity
+import team.nukiya.demention.domain.point.domain.QPointEntity.pointEntity
 import team.nukiya.demention.domain.support.domain.QSupportEntity.supportEntity
 import team.nukiya.demention.domain.user.domain.Coordinate
 import team.nukiya.demention.domain.user.domain.QQueryUserInformation
@@ -55,9 +58,14 @@ class UserReader(
                             .where(supportEntity.userEntity.id.eq(user.id)),
                         "supportCount"
                     ),
+                    Expressions.template(Double::class.java, "ROUND({0}, 2)", pointEntity.point.avg()),
                 )
             )
             .from(userEntity)
+            .join(supportEntity)
+            .on(supportEntity.userEntity.id.eq(user.id))
+            .join(pointEntity)
+            .on(pointEntity.receiveSupportEntity.id.eq(supportEntity.id))
             .where(userEntity.id.eq(user.id))
             .fetchOne()
 }

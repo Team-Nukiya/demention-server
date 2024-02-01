@@ -1,5 +1,6 @@
 package team.nukiya.demention.domain.point.domain
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
@@ -26,5 +27,6 @@ class PointEntity(
     val receiveSupportEntity: SupportEntity?,
 
     @NotNull
+    @Column(columnDefinition = "DECIMAL(2, 1)")
     val point: Float,
 ) : BaseEntity()

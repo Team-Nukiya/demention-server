@@ -8,4 +8,5 @@ open class UserInformation(
     val addressName: String,
     val helpCount: Long,
     val supportCount: Long,
+    val point: Double,
 )

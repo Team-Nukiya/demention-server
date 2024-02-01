@@ -9,10 +9,12 @@ class QueryUserInformation @QueryProjection constructor(
     addressName: String,
     helpCount: Long,
     supportCount: Long,
+    point: Double,
 ) : UserInformation(
     userId = userId,
     nickName = nickName,
     addressName = addressName,
     helpCount = helpCount,
     supportCount = supportCount,
+    point = point,
 )

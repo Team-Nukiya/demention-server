@@ -93,12 +93,12 @@ class HelpReader(
                     helpEntity.helpStartDateTime,
                     helpEntity.helpEndDateTime,
                     Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
-                    Expressions.asString(user.nickName).`as`(userEntity.nickName)
+                    Expressions.asString(user.nickName).`as`(userEntity.nickName),
                 )
             )
             .from(helpEntity)
             .join(helpEntity.userEntity, userEntity)
-            .where(userEntity.id.eq(user.id))
+            .on(userEntity.id.eq(user.id))
             .offset(paging.page)
             .limit(paging.limit)
             .fetch()

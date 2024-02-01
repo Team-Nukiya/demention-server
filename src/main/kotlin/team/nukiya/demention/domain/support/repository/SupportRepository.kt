@@ -62,7 +62,7 @@ class SupportRepository(
                     helpEntity.helpStartDateTime,
                     helpEntity.helpEndDateTime,
                     Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
-                    Expressions.asString(user.nickName).`as`(userEntity.nickName)
+                    Expressions.asString(user.nickName).`as`(userEntity.nickName),
                 )
             )
             .from(userEntity)

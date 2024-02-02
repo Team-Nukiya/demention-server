@@ -20,7 +20,7 @@ class HelpEntity(
     id: UUID,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     val userEntity: UserEntity?,
 
     @NotNull

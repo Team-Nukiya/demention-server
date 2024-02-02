@@ -9,4 +9,5 @@ object ApiUrlConstant {
     const val USER_URL = "$VERSION/users"
     const val HELP_URL = "$VERSION/helps"
     const val SUPPORT_URL = "$VERSION/supports"
+    const val POINT_URL = "$VERSION/points"
 }

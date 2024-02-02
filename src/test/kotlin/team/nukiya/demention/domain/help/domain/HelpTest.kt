@@ -5,6 +5,7 @@ import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import team.nukiya.demention.domain.help.domain.HelpStatus.HELPING
 import team.nukiya.demention.domain.help.exception.FailedIdentityVerification
+import team.nukiya.demention.domain.help.exception.MyHelpCanNotSupportException
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -54,6 +55,30 @@ class HelpTest {
         // when & teen
         assertThrows<FailedIdentityVerification> {
             help.verifyIdentityVerification(userId)
+        }
+    }
+
+    @Test
+    fun `자신의 공고에는 지원할 수 없다`() {
+        // given
+        val userId = UUID.randomUUID()
+        val help = Help(
+            id = UUID.randomUUID(),
+            userId = userId,
+            title = "약이 필요합니다.",
+            content = "이러이러해서 약이 필요합니다.",
+            compensation = "1만 원",
+            helpImageUrl = "이미지 링크",
+            helpStatus = HELPING,
+            helpStartDateTime = LocalDateTime.MIN,
+            helpEndDateTime = LocalDateTime.MAX,
+            createdDateTime = LocalDateTime.now(),
+            modifiedDateTime = LocalDateTime.now(),
+        )
+
+        // when & teen
+        assertThrows<MyHelpCanNotSupportException> {
+            help.checkIsMine(userId)
         }
     }
 }

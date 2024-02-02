@@ -1,7 +1,9 @@
 package team.nukiya.demention.domain.support.domain
 
+import team.nukiya.demention.domain.support.domain.SupportStatus.DONE
 import team.nukiya.demention.domain.support.domain.SupportStatus.SUPPORTED
 import team.nukiya.demention.domain.support.exception.SupportCanNotCancelException
+import team.nukiya.demention.domain.support.exception.SupportIsNotDoneException
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -15,6 +17,12 @@ data class Support(
     fun checkCancellable() {
         if (this.supportStatus != SUPPORTED) {
             throw SupportCanNotCancelException
+        }
+    }
+
+    fun checkIsDone() {
+        if (this.supportStatus != DONE) {
+            throw SupportIsNotDoneException
         }
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import team.nukiya.demention.global.constant.ApiUrlConstant.AUTH_URL
 import team.nukiya.demention.global.constant.ApiUrlConstant.HELP_URL
+import team.nukiya.demention.global.constant.ApiUrlConstant.POINT_URL
 import team.nukiya.demention.global.constant.ApiUrlConstant.SUPPORT_URL
 import team.nukiya.demention.global.constant.ApiUrlConstant.USER_URL
 import team.nukiya.demention.global.filter.GlobalExceptionFilter
@@ -34,27 +35,32 @@ class SecurityConfig(
             .formLogin { it.disable() }
             .cors(Customizer.withDefaults())
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authorizeHttpRequests {
+            .authorizeHttpRequests {authorize -> authorize
                 // health check
-                it.requestMatchers(GET, "/health-check").permitAll()
+                .requestMatchers(GET, "/health-check").permitAll()
                 // rest docs
-                it.requestMatchers(GET, "/docs/index.html").permitAll()
+                .requestMatchers(GET, "/docs/index.html").permitAll()
                 // auth
-                it.requestMatchers(POST, "$AUTH_URL/codes").permitAll()
-                it.requestMatchers(GET, "$AUTH_URL/certified").permitAll()
+                .requestMatchers(POST, "$AUTH_URL/codes").permitAll()
+                .requestMatchers(GET, "$AUTH_URL/certified").permitAll()
                 // user
-                it.requestMatchers(POST, "$USER_URL/sign-up").permitAll()
-                it.requestMatchers(POST, "$USER_URL/sign-in").permitAll()
+                .requestMatchers(POST, "$USER_URL/sign-up").permitAll()
+                .requestMatchers(POST, "$USER_URL/sign-in").permitAll()
+                .requestMatchers(GET, "$USER_URL/my").authenticated()
                 // help
-                it.requestMatchers(POST, HELP_URL).authenticated()
-                it.requestMatchers(PATCH, "$HELP_URL/{help-id}").authenticated()
-                it.requestMatchers(DELETE, "$HELP_URL/{help-id}").authenticated()
-                it.requestMatchers(GET, "$HELP_URL/{help-id}").authenticated()
-                it.requestMatchers(GET, HELP_URL).authenticated()
+                .requestMatchers(POST, HELP_URL).authenticated()
+                .requestMatchers(PATCH, "$HELP_URL/{help-id}").authenticated()
+                .requestMatchers(DELETE, "$HELP_URL/{help-id}").authenticated()
+                .requestMatchers(GET, "$HELP_URL/{help-id}").authenticated()
+                .requestMatchers(GET, HELP_URL).authenticated()
+                .requestMatchers(GET, "$HELP_URL/histories").authenticated()
                 // support
-                it.requestMatchers(POST, SUPPORT_URL).authenticated()
-                it.requestMatchers(PATCH, "$SUPPORT_URL/{help-id}").authenticated()
-                it.anyRequest().denyAll()
+                .requestMatchers(POST, SUPPORT_URL).authenticated()
+                .requestMatchers(PATCH, "$SUPPORT_URL/{help-id}").authenticated()
+                .requestMatchers(GET, "$SUPPORT_URL/histories").authenticated()
+                // point
+                .requestMatchers(POST, POINT_URL).authenticated()
+                .anyRequest().denyAll()
             }
             .addFilterBefore(JwtFilter(jwtParser), UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(GlobalExceptionFilter(objectMapper), JwtFilter::class.java)

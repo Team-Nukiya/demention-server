@@ -6,10 +6,12 @@ import jakarta.persistence.EnumType.STRING
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
+import org.hibernate.annotations.SQLRestriction
 import team.nukiya.demention.global.entity.BaseUUIDEntity
 import java.time.LocalDateTime
 import java.util.UUID
 
+@SQLRestriction("deleted_date_time is null")
 @Table(name = "tbl_user")
 @Entity
 class UserEntity(
@@ -44,9 +46,6 @@ class UserEntity(
     @Enumerated(STRING)
     val authority: Authority,
 
-    deletedDateTime: LocalDateTime? = null,
-) : BaseUUIDEntity() {
     @Column(columnDefinition = "DATETIME(6)")
-    var deletedDateTime = deletedDateTime
-        protected set
-}
+    val deletedDateTime: LocalDateTime? = null,
+) : BaseUUIDEntity()

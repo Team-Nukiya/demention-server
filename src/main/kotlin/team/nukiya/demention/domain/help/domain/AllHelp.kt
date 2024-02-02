@@ -12,8 +12,4 @@ open class AllHelp(
     val helpEndDateTime: LocalDateTime,
     val userAddressName: String,
     val userNickName: String,
-) {
-    companion object {
-        const val DEFAULT_LIMIT = 10L
-    }
-}
+)

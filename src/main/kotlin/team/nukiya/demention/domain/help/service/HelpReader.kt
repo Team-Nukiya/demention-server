@@ -1,6 +1,7 @@
 package team.nukiya.demention.domain.help.service
 
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.core.types.dsl.Expressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
@@ -17,6 +18,7 @@ import team.nukiya.demention.domain.help.domain.QQueryAllHelp
 import team.nukiya.demention.domain.help.domain.QQueryHelpDetailsVO
 import team.nukiya.demention.domain.help.repository.HelpEntityRepository
 import team.nukiya.demention.domain.user.domain.QUserEntity.userEntity
+import team.nukiya.demention.domain.user.domain.User
 import team.nukiya.demention.global.dto.Paging
 import java.util.UUID
 
@@ -76,8 +78,29 @@ class HelpReader(
                 helpStatusEq(helpStatus),
                 userEntity.sido.eq(sido),
             )
-            .offset(paging.page)
-            .limit(paging.limit)
+            .offset(paging.offset)
+            .limit(paging.size)
+            .fetch()
+
+    fun getHistories(user: User, paging: Paging): List<AllHelp> =
+        jpaQueryFactory
+            .select(
+                QQueryAllHelp(
+                    helpEntity.id,
+                    helpEntity.title,
+                    helpEntity.compensation,
+                    helpEntity.helpImageUrl,
+                    helpEntity.helpStartDateTime,
+                    helpEntity.helpEndDateTime,
+                    Expressions.asString(user.address.addressName).`as`(userEntity.addressName),
+                    Expressions.asString(user.nickName).`as`(userEntity.nickName),
+                )
+            )
+            .from(helpEntity)
+            .join(helpEntity.userEntity, userEntity)
+            .on(userEntity.id.eq(user.id))
+            .offset(paging.offset)
+            .limit(paging.size)
             .fetch()
 
     private fun helpStatusEq(helpStatus: HelpStatus): BooleanExpression? =

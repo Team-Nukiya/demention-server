@@ -86,7 +86,6 @@ class HelpController(
         @RequestParam(required = false) page: Long?,
         @RequestParam(required = false) size: Long?,
     ): GetAllHelpsResponse {
-        println(page)
         val helps = helpService.getAll(
             helpStatus = helpStatus,
             currentUser = provider.user,

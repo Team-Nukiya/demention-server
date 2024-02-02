@@ -69,7 +69,7 @@ class SupportRepository(
             .join(supportEntity)
             .on(supportEntity.userEntity.id.eq(user.id))
             .join(supportEntity.helpEntity, helpEntity)
-            .offset(paging.page)
-            .limit(paging.limit)
+            .offset(paging.offset)
+            .limit(paging.size)
             .fetch()
 }

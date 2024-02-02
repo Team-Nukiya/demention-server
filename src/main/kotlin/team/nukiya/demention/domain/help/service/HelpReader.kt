@@ -78,8 +78,8 @@ class HelpReader(
                 helpStatusEq(helpStatus),
                 userEntity.sido.eq(sido),
             )
-            .offset(paging.page)
-            .limit(paging.limit)
+            .offset(paging.offset)
+            .limit(paging.size)
             .fetch()
 
     fun getHistories(user: User, paging: Paging): List<AllHelp> =
@@ -99,8 +99,8 @@ class HelpReader(
             .from(helpEntity)
             .join(helpEntity.userEntity, userEntity)
             .on(userEntity.id.eq(user.id))
-            .offset(paging.page)
-            .limit(paging.limit)
+            .offset(paging.offset)
+            .limit(paging.size)
             .fetch()
 
     private fun helpStatusEq(helpStatus: HelpStatus): BooleanExpression? =

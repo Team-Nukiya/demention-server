@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RestController
 import team.nukiya.demention.domain.help.controller.dto.CreateHelpRequest
 import team.nukiya.demention.domain.help.controller.dto.GetAllHelpsResponse
 import team.nukiya.demention.domain.help.controller.dto.UpdateHelpRequest
-import team.nukiya.demention.domain.help.domain.AllHelp.Companion.DEFAULT_LIMIT
 import team.nukiya.demention.domain.help.domain.HelpDetails
 import team.nukiya.demention.domain.help.domain.HelpStatus
 import team.nukiya.demention.domain.help.service.HelpService
 import team.nukiya.demention.global.constant.ApiUrlConstant.HELP_URL
 import team.nukiya.demention.global.dto.Paging
-import team.nukiya.demention.global.dto.Paging.Companion.DEFAULT_PAGE
 import team.nukiya.demention.global.security.auth.AuthDetails
 import java.util.UUID
 
@@ -85,13 +83,14 @@ class HelpController(
     fun getAllHelps(
         @NotNull @RequestParam("help-status") helpStatus: HelpStatus,
         @AuthenticationPrincipal provider: AuthDetails,
-        @RequestParam(defaultValue = DEFAULT_PAGE.toString()) page: Long,
-        @RequestParam(defaultValue = DEFAULT_LIMIT.toString()) limit: Long,
+        @RequestParam(required = false) page: Long?,
+        @RequestParam(required = false) size: Long?,
     ): GetAllHelpsResponse {
+        println(page)
         val helps = helpService.getAll(
             helpStatus = helpStatus,
             currentUser = provider.user,
-            paging = Paging(page = page, limit = limit)
+            paging = Paging(page = page, size = size)
         )
         return GetAllHelpsResponse(helps)
     }
@@ -99,10 +98,10 @@ class HelpController(
     @GetMapping("/histories")
     fun getHistories(
         @AuthenticationPrincipal provider: AuthDetails,
-        @RequestParam(defaultValue = DEFAULT_PAGE.toString()) page: Long,
-        @RequestParam(defaultValue = DEFAULT_LIMIT.toString()) limit: Long,
+        @RequestParam(required = false) page: Long?,
+        @RequestParam(required = false) size: Long?,
     ): GetAllHelpsResponse {
-        val histories = helpService.getHistories(provider.user, Paging(page = page, limit = limit))
+        val histories = helpService.getHistories(provider.user, Paging(page = page, size = size))
         return GetAllHelpsResponse(histories)
     }
 
